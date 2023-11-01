@@ -15,8 +15,15 @@ class Register extends Component {
     register(email, pass, userName){
         auth.createUserWithEmailAndPassword(email,pass)
         .then(response => {
-            console.log("Registrando ok", response);
+            console.log("Registrando ok",response);
+
+            db.collection("users").add({
+                owner: auth.currentUser.email,
+                userName: userName, 
+                createdAt: Date.now(),
+            });
         })
+        .then( res=>console.log(res))
         .catch(error => {
             console.log(error);
         })

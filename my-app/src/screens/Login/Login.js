@@ -14,13 +14,14 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
+            logueado: false
         };
     }
 
     componentDidMount(){
         auth.onAuthStateChanged((user)=>{
             if(user){
-                this.props.navigation.navigate("Menu")
+                this.props.navigation.navigate("Home")
             }
         });
     }
@@ -30,6 +31,7 @@ class Login extends Component {
             .signInWithEmailAndPassword(email,pass)
             .then((response)=> {
                 console.log("Login ok",response);
+                this.props.navigation.navigate("Home")
             })
             .catch((error)=>{
                 console.log(error);
@@ -67,7 +69,7 @@ class Login extends Component {
                 > Ingresar </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                onPress={()=> this.props.navigation.navigate("Registro")}>
+                onPress={()=> this.props.navigation.navigate("Register")}>
                     <Text>No tengo cuenta. Registrarme.</Text>
                 </TouchableOpacity>
             </View>
