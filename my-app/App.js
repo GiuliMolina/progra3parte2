@@ -1,13 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-<<<<<<< HEAD
 import Home from './src/screens/Home/Home';
-
-export default function App() {
-  return (
-   <View style={styles.container}>
-    <Home/>
-   </View>
-=======
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
@@ -27,7 +19,6 @@ export default function App() {
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
->>>>>>> 1720bb00989dc3bfb0ac350bbb911109edccee00
   );
 }
 
