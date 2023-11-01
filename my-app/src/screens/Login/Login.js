@@ -13,8 +13,7 @@ class Login extends Component {
         super();
         this.state = {
             email: "",
-            password: "",
-            logueado: false
+            password: ""
         };
     }
 
@@ -27,11 +26,11 @@ class Login extends Component {
     }
 
     login(email,pass){
+        
         auth
             .signInWithEmailAndPassword(email,pass)
             .then((response)=> {
-                console.log("Login ok",response);
-                this.props.navigation.navigate("Home")
+                    this.props.navigation.navigate("Home")
             })
             .catch((error)=>{
                 console.log(error);
