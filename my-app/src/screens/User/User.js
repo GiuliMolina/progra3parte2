@@ -10,4 +10,13 @@ class User extends Component{
             algo : ""
         }
     }
+
+    render(){
+
+        return(
+            <View>
+                <Text> Mi perfil </Text>
+            </View>
+        )
+    }
 }
