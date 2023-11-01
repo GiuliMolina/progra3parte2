@@ -11,14 +11,33 @@ import {
 class Home extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {listaDePosteos: 0
+
+    };
   }
 
   render() {
     return (
       <View>
         <Text>HOME</Text>
-        <Text>Pagina principal</Text>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate("Login")}>
+                    <Text> Ir a login</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate("Register")}>
+                    <Text> Ir a register</Text>
+                </TouchableOpacity>
+        <Text>Posteos</Text>
+        {
+                    this.state.listaDePosteos === 0 
+                    ?
+                    <Text>Cargando...</Text>
+                    :
+                    <FlatList 
+                        data= {this.state.listaPost}
+                        keyExtractor={ unPost => unPost.id }
+                        renderItem={ ({item}) => <Post infoPost = { item } /> }
+                    />
+                }
       </View>
     );
   }
