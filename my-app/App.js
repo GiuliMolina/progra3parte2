@@ -14,7 +14,12 @@ export default function App() {
     <NavigationContainer style={styles.container}>
       <Stack.Navigator>
       <Stack.Screen
-        name="Homesd"
+        name="Menu"
+        component ={Menu}
+        options = {{headerShown:false}}
+        />
+      <Stack.Screen
+        name="Home"
         component ={Home}
         options = {{headerShown:true}}
         />
@@ -31,11 +36,6 @@ export default function App() {
         <Stack.Screen
         name="FromPostear"
         component ={FromPostear}
-        options = {{headerShown:false}}
-        />
-        <Stack.Screen
-        name="Menu"
-        component ={Menu}
         options = {{headerShown:false}}
         />
 

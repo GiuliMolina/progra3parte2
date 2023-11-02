@@ -26,8 +26,8 @@ render(){
     return (
           <Tab.Navigator>
              <Tab.Screen name="Home" component={ Home } />
-             <Tab.Screen name="Profile" component={ Login } />
-             <Tab.Screen name="NewPost" component={ Register } />
+             <Tab.Screen name="Login" component={ Login } />
+             <Tab.Screen name="Register" component={ Register } />
           </Tab.Navigator>
      );
      
