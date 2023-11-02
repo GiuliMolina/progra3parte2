@@ -13,6 +13,11 @@ class FormPostear extends Component {
         console.log(this.state.post)       
     }
 
+    logout(){
+        auth.signOut();
+        this.props.navigation.navigate("Login");
+    }
+
     posteo(){
         db.collection('posts').add({
             owner: auth.currentUser.email,
