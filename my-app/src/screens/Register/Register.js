@@ -13,14 +13,17 @@ class Register extends Component {
     }
 
     register(email, pass, userName){
-        if(email === null ){
+        if(email === null){
             <Text>Tenes que ingresar un email</Text>
         } else if (!email.includes("@")){
             <Text>Tu email debe contener un @</Text>
-        }else if (!email.includes(".")){
+        } else if (!email.includes(".")){
             <Text>Tu email debe contener un dominio, ej: .com</Text>
-        }//faltan las validaciones de password y usuario
-        else{
+        } else if (pass === null){
+            <Text>Tenes que ingresar una contraseña</Text>
+        } else if (userName === null){
+            <Text>Tenes que ingresar una nombre de usuario</Text>
+        } else{
             auth.createUserWithEmailAndPassword(email,pass)
             .then(response => {
                 console.log("Registrando ok",response);
@@ -36,7 +39,6 @@ class Register extends Component {
                 console.log(error);
             })
         }
-        
     }
 
     render(){

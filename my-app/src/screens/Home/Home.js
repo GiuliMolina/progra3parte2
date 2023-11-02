@@ -7,6 +7,7 @@ import {
   StyleSheet,
   FlatList 
 } from "react-native";
+import { auth } from "../../firebase/config";
 
 class Home extends Component {
   constructor() {
@@ -14,6 +15,11 @@ class Home extends Component {
     this.state = {listaDePosteos: 1
 
     };
+  }
+
+  logout(){
+    auth.signOut();
+    this.props.navigation.navigate("Login");
   }
 
   render() {

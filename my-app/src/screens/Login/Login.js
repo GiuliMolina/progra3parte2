@@ -26,15 +26,24 @@ class Login extends Component {
     }
 
     login(email,pass){
-        
-        auth
+        if(email === null ){
+            <Text>Tenes que ingresar un email</Text>
+        } else if (!email.includes("@")){
+            <Text>Tu email debe contener un @</Text>
+        }else if (!email.includes(".")){
+            <Text>Tu email debe contener un dominio, ej: .com</Text>
+        }else if (pass === null){
+            <Text>Tenes que ingresar una contraseña</Text>
+        } else{
+            auth
             .signInWithEmailAndPassword(email,pass)
             .then((response)=> {
                     this.props.navigation.navigate("Home")
             })
-            .catch((error)=>{
+            .catch((error)=> {
                 console.log(error);
             });
+        }
     }
 
     render(){
