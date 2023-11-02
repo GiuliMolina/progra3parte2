@@ -11,7 +11,7 @@ import {
 class Home extends Component {
   constructor() {
     super();
-    this.state = {listaDePosteos: 0
+    this.state = {listaDePosteos: 1
 
     };
   }
