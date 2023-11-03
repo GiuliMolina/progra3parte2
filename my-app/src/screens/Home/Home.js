@@ -8,6 +8,7 @@ import {
   FlatList 
 } from "react-native";
 import { auth } from "../../firebase/config";
+import Menu from "../../components/Menu/Menu";
 
 class Home extends Component {
   constructor() {
@@ -40,7 +41,7 @@ class Home extends Component {
                  <TouchableOpacity onPress={()=>this.props.navigation.navigate("Login")}>
                     <Text> Ir a login</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate("Register")}>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")}>
                     <Text> Ir a register</Text>
                 </TouchableOpacity>
       </View>
