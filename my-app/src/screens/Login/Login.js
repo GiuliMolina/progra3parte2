@@ -1,5 +1,5 @@
-import react, {Component} from "react";
-import {auth} from "../../firebase/config";
+import react, { Component } from "react";
+import { auth } from "../../firebase/config";
 import {
     TextInput,
     TouchableOpacity,
@@ -9,77 +9,83 @@ import {
 } from "react-native";
 
 class Login extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            logueoValido: false,
         };
     }
 
-    componentDidMount(){
-        auth.onAuthStateChanged((user)=>{
-            if(user){
+    componentDidMount() { //remember me 
+        auth.onAuthStateChanged((user) => {
+            if (user) {
                 this.props.navigation.navigate("Home")
             }
+            //else {
+            //     this.props.navigation.navigate("Login")
+            // }
         });
     }
 
-    login(email,pass){
-        if(email === null ){
-            <Text>Tenes que ingresar un email</Text>
-        } else if (!email.includes("@")){
-            <Text>Tu email debe contener un @</Text>
-        }else if (!email.includes(".")){
-            <Text>Tu email debe contener un dominio, ej: .com</Text>
-        }else if (pass === null){
-            <Text>Tenes que ingresar una contraseña</Text>
-        } else{
-            auth
-            .signInWithEmailAndPassword(email,pass)
-            .then((response)=> {
-                    this.props.navigation.navigate("Home")
-            })
-            .catch((error)=> {
-                console.log(error);
-            });
+    login(email, pass) {
+        if (email === null) {
+            <Text> Tenes que ingresar un email</Text>
+        } else if (!email.includes("@")) {
+            <Text> Tu email debe contener un @</Text>
+        } else if (!email.includes(".")) {
+            <Text> Tu email debe contener un dominio, ej: .com</Text>
+        } else if (pass === null) {
+            <Text> Tenes que ingresar una contraseña</Text>
+        } else {
+            logueoValido = true,
+                auth
+                    .signInWithEmailAndPassword(email, pass)
+                    .then((response) => {
+                        this.props.navigation.navigate("Home")
+                        this.setState({email:""}),
+                        this.setState({password:""})
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
         }
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <View style={styles.formContainer}>
                 <Text>Login</Text>
                 <TextInput
-                style={styles.input}
-                onChangeText={(text)=>this.setState({email:text})}
-                placeholder="email"
-                keyboardType="email-adress"
-                value={this.state.email}
+                    style={styles.input}
+                    onChangeText={(text) => this.setState({ email: text })}
+                    placeholder="email"
+                    keyboardType="email-adress"
+                    value={this.state.email}
                 />
                 <TextInput
-                style={styles.input}
-                onChangeText={(text)=>this.setState({password:text})}
-                placeholder="password"
-                keyboardType="default"
-                secureTextEntry={true}
-                value={this.state.password}
+                    style={styles.input}
+                    onChangeText={(text) => this.setState({ password: text })}
+                    placeholder="password"
+                    keyboardType="default"
+                    secureTextEntry={true}
+                    value={this.state.password}
                 />
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={()=> this.login(this.state.email, this.state.password)}
+                    onPress={() => this.login(this.state.email, this.state.password)}
                 >
-                <Text
-                style={styles.button}
-                onPress = {()=>
-                    this.login(this.state.email, 
-                    this.state.password)}
-                > Ingresar </Text>
+                    <Text
+                        style={styles.button} onPress={() => this.login(this.state.email, this.state.password)}
+                    > Ingresar </Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                onPress={()=> this.props.navigation.navigate("Register")}>
-                    <Text>No tengo cuenta. Registrarme.</Text>
+
+
+                <TouchableOpacity onPress={() => this.props.navigation.navigate("Register")}>
+                    <Text> No tengo cuenta. Registrate.</Text>
                 </TouchableOpacity>
+
             </View>
         );
     }
@@ -93,16 +99,16 @@ const styles = StyleSheet.create({
     input: {
         height: 20,
         paddingVertical: 15,
-        paddingHorizontal:10,
-        borderWidth:1,
+        paddingHorizontal: 10,
+        borderWidth: 1,
         borderColor: "#ccc",
         borderStyle: "solid",
-        borderRadius: 6, 
-        marginVertical:10
+        borderRadius: 6,
+        marginVertical: 10
     },
     button: {
-        backgroundColor:"blue",
-        paddingHorizontal:10,
+        backgroundColor: "blue",
+        paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",
         borderRadius: 4,
@@ -112,6 +118,9 @@ const styles = StyleSheet.create({
     },
     textButton: {
         color: "#fff"
+    },
+    textoLogin: {
+        color: "red",
     }
 
 });

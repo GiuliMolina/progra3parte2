@@ -19,7 +19,7 @@ class Home extends Component {
 
   logout(){
     auth.signOut();
-    this.props.navigation.navigate("Login");
+    this.props.navigation.navigate("Login")
   }
 
   render() {
@@ -37,7 +37,6 @@ class Home extends Component {
                         renderItem={ ({item}) => <Post infoPost = { item } /> }
                     />
         }
-        <Text></Text>
                  <TouchableOpacity onPress={()=>this.props.navigation.navigate("Login")}>
                     <Text> Ir a login</Text>
                 </TouchableOpacity>

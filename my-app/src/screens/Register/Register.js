@@ -8,7 +8,10 @@ class Register extends Component {
         this.state = {
             email: "",
             userName: "",
-            password: ""
+            password: "",
+            miniBio: "",
+            urlImagen: "",
+            registrado: false
         }
     }
 
@@ -23,18 +26,27 @@ class Register extends Component {
             <Text>Tenes que ingresar una contraseña</Text>
         } else if (userName === null){
             <Text>Tenes que ingresar una nombre de usuario</Text>
+        } else if (pass < 6) {
+            <Text>Tu contraseña tiene que ser de 6 caracteres o más</Text>
         } else{
             auth.createUserWithEmailAndPassword(email,pass)
             .then(response => {
                 console.log("Registrando ok",response);
+                this.setState({email:""}),
+                this.setState({password:""})
+                this.setState({userName:""}),
     
-                db.collection("users").add({
+                db.collection('users').add({
                     owner: auth.currentUser.email,
                     userName: userName, 
+                    password: this.state.password,
+                    miniBio: this.state.miniBio,
+                    urlImagen: this.state.urlImagen,
                     createdAt: Date.now(),
                 });
             })
             .then( res=>console.log(res))
+            this.setState({registrado:true})
             .catch(error => {
                 console.log(error);
             })
@@ -59,6 +71,29 @@ class Register extends Component {
                     keyBoardType="default"
                     secureTextEntry={true}
                     value = {this.state.password}
+                />
+
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(text)=>this.setState({userName:text})}
+                    placeholder = "user name"
+                    keyBoardType="default"
+                    value = {this.state.userName}
+                />
+
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(text)=>this.setState({miniBio:text})}
+                    placeholder = "mini bio"
+                    keyBoardType="default"
+                    value = {this.state.miniBio}
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(text)=>this.setState({urlImagen:text})}
+                    placeholder = "foto de perfil"
+                    keyBoardType="default"
+                    value = {this.state.urlImagen}
                 />
 
                 <TouchableOpacity style={styles.button} onPress={()=> this.register(this.state.email,this.state.password,this.state.userName)}>
