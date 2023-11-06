@@ -3,11 +3,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Menu from './src/components/Menu/Menu';
-import Home from "./src/screens/Home/Home"
-import Login from "./src/screens/Login/Login"
-import Register from "./src/screens/Register/Register"
-import FromPostear from "./src/screens/FormPostear/FormPostear"
-import User from "./src/screens/User/User"
+import Home from "./src/screens/Home/Home";
+import Login from "./src/screens/Login/Login";
+import Register from "./src/screens/Register/Register";
+import FromPostear from "./src/screens/FormPostear/FormPostear";
+import User from "./src/screens/User/User";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -28,21 +28,19 @@ export default function App() {
         name="Menu"
         component ={Menu}
         />
-      {/* <Stack.Screen
-        name="Home"
-        component ={Home}
-        options = {{headerShown:true}}
-        />
-        <Stack.Screen
+        {/* <Stack.Screen
         name="FromPostear"
         component ={FromPostear}
         options = {{headerShown:true}}
-        /> */}
-        {/* <Stack.Screen
+        /> 
+        <Stack.Screen
+
+        />
+        <Stack.Screen
         name="MiPerfil"
         component ={User}
         options = {{headerShown:true}}
-        /> */}
+        />  */}
       </Stack.Navigator>
     </NavigationContainer>
   );
