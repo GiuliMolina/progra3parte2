@@ -8,21 +8,17 @@ class FormPostear extends Component {
     constructor(props){
         super();
         this.state ={
-            post: ""
+            textPost: ""
         } 
         console.log(this.state.post)       
     }
 
-    logout(){
-        auth.signOut();
-        this.props.navigation.navigate("Login");
-    }
+
 
     posteo(){
         db.collection('posts').add({
             owner: auth.currentUser.email,
             post: this.state.post,
-            likes: [],
             createdAt: Date.now()
         })
         .then(console.log('Posteado correctamente'))
@@ -37,12 +33,12 @@ class FormPostear extends Component {
                   style= {styles.input}
                   onChangeText ={(texto) => this.setState({ post: texto})}
                   placeholder = 'postea'
-                  keyboardType = "default"
-                  value = {this.state.post}
+                  keyboardType = 'default'
+                  value = {this.state.textPost}
                   />
                 <TouchableOpacity
                   style={ styles.button}
-                  onPress = {() => this.postear()}
+                  
                 >
                     <Text style = {styles.textButton}> Postear </Text>
                 </TouchableOpacity>
