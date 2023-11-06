@@ -28,21 +28,19 @@ export default function App() {
         name="Menu"
         component ={Menu}
         />
-      <Stack.Screen
-        name="Home"
-        component ={Home}
-        options = {{headerShown:true}}
-        />
-        <Stack.Screen
+        {/* <Stack.Screen
         name="FromPostear"
         component ={FromPostear}
         options = {{headerShown:true}}
+        /> 
+        <Stack.Screen
+
         />
         <Stack.Screen
         name="MiPerfil"
         component ={User}
         options = {{headerShown:true}}
-        /> 
+        />  */}
       </Stack.Navigator>
     </NavigationContainer>
   );

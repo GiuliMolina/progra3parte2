@@ -11,30 +11,34 @@ class Register extends Component {
             password: "",
             miniBio: "",
             urlImagen: "",
-            registrado: false
+            errorMessage: ""
         }
     }
 
     register(email, pass, userName){
-        if(email === null){
-            <Text>Tenes que ingresar un email</Text>
-        } else if (!email.includes("@")){
-            <Text>Tu email debe contener un @</Text>
-        } else if (!email.includes(".")){
-            <Text>Tu email debe contener un dominio, ej: .com</Text>
-        } else if (pass === null){
-            <Text>Tenes que ingresar una contraseña</Text>
-        } else if (userName === null){
-            <Text>Tenes que ingresar una nombre de usuario</Text>
-        } else if (pass < 6) {
-            <Text>Tu contraseña tiene que ser de 6 caracteres o más</Text>
-        } else{
+        if (email === "") {
+            this.setState({
+                errorMessage: "Tenes que ingresar un email"
+            })
+        } else if (!email.includes("@")) {
+            this.setState({
+                errorMessage: "Tu email debe contener un @"
+            }) 
+        } else if (!email.includes(".")) {
+            this.setState({
+                errorMessage: "Tu email debe contener un dominio, ej: .com"
+            })
+        } else if (pass === "") {
+            this.setState({
+                errorMessage: "Tenes que ingresar una contraseña"
+            })
+        }else if (pass < 6) {
+            this.setState({
+                errorMessage: "La contraseña tiene que tener por lo menos 6 caracteres"
+            })
+        }else{
             auth.createUserWithEmailAndPassword(email,pass)
             .then(response => {
-                console.log("Registrando ok",response);
-                this.setState({email:""}),
-                this.setState({password:""})
-                this.setState({userName:""}),
     
                 db.collection('users').add({
                     owner: auth.currentUser.email,
@@ -45,13 +49,22 @@ class Register extends Component {
                     createdAt: Date.now(),
                 });
             })
-            .then( res=>console.log(res))
-            this.setState({registrado:true})
-            .catch(error => {
-                console.log(error);
+            .then( (res)=>{
+                this.setState({
+                    email:"",
+                    password:"",
+                    userName:"",
+                    miniBio:"",
+                    urlImagen:""
+                }),
+                this.props.navigation.navigate("Menu")
             })
-        }
-    }
+            .catch(error => {
+                console.log(error)
+                ;
+            })
+        }}
+
 
     render(){
         return(

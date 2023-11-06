@@ -14,7 +14,7 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            logueoValido: false,
+            errorMessage: ""
         };
     }
 
@@ -23,35 +23,46 @@ class Login extends Component {
             if (user) {
                 this.props.navigation.navigate("Home")
             }
-            //else {
-            //     this.props.navigation.navigate("Login")
-            // }
         });
     }
 
     login(email, pass) {
-        if (email === null) {
-            <Text> Tenes que ingresar un email</Text>
+        if (email === "") {
+            this.setState({
+                errorMessage: "Tenes que ingresar un email"
+            })
         } else if (!email.includes("@")) {
-            <Text> Tu email debe contener un @</Text>
+            this.setState({
+                errorMessage: "Tu email debe contener un @"
+            }) 
         } else if (!email.includes(".")) {
-            <Text> Tu email debe contener un dominio, ej: .com</Text>
-        } else if (pass === null) {
-            <Text> Tenes que ingresar una contraseña</Text>
-        } else {
-            logueoValido = true,
-                auth
-                    .signInWithEmailAndPassword(email, pass)
-                    .then((response) => {
-                        this.props.navigation.navigate("Home")
-                        this.setState({email:""}),
-                        this.setState({password:""})
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-        }
+            this.setState({
+                errorMessage: "Tu email debe contener un dominio, ej: .com"
+            })
+        } else if (pass === "") {
+            this.setState({
+                errorMessage: "Tenes que ingresar una contraseña"
+            })
+        }else if (pass < 6) {
+            this.setState({
+                errorMessage: "La contraseña tiene que tener por lo menos 6 caracteres"
+            })
+        }else{
+            auth
+            .signInWithEmailAndPassword(email, pass)
+            .then((response) => {
+                this.setState({
+                    email: "",
+                    password: "",
+                })
+                this.props.navigation.navigate("Menu")
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        } 
     }
+
 
     render() {
         return (
@@ -77,11 +88,14 @@ class Login extends Component {
                     onPress={() => this.login(this.state.email, this.state.password)}
                 >
                     <Text
-                        style={styles.button} onPress={() => this.login(this.state.email, this.state.password)}
+                        style={styles.button}
                     > Ingresar </Text>
                 </TouchableOpacity>
 
-
+                {this.state.errorMessage !== "" ?
+                    <Text>{this.state.errorMessage}</Text>
+                    : false
+                }
                 <TouchableOpacity onPress={() => this.props.navigation.navigate("Register")}>
                     <Text> No tengo cuenta. Registrate.</Text>
                 </TouchableOpacity>
