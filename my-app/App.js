@@ -28,7 +28,7 @@ export default function App() {
         name="Menu"
         component ={Menu}
         />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Home"
         component ={Home}
         options = {{headerShown:true}}
@@ -37,7 +37,7 @@ export default function App() {
         name="FromPostear"
         component ={FromPostear}
         options = {{headerShown:true}}
-        />
+        /> */}
         {/* <Stack.Screen
         name="MiPerfil"
         component ={User}
