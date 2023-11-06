@@ -13,7 +13,22 @@ class Post extends Component {
     }
 
     componentDidMount(){
-        
+        if(this.props.dataPost.datos.likes.includes(auth.currentUser.email)){
+            this.setState({
+                like: true
+            })
+        }
+
+    }
+
+    likear(){
+        db.collection('post').doc(this.dataPost.id).update({
+            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+        })
+        .then(res => this.setState({
+            like: true,
+            cantidadLikes: this.props.dataPost.datos.likes.length
+        }))
     }
 
     render(){

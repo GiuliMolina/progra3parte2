@@ -10,15 +10,15 @@ class FormPostear extends Component {
         this.state ={
             textPost: ""
         } 
-        console.log(this.state.post)       
+        console.log(this.state.textPost)       
     }
 
 
 
-    posteo(){
+    posteo(owner, textPost, createdAt){
         db.collection('posts').add({
             owner: auth.currentUser.email,
-            post: this.state.post,
+            textPost: this.state.post,
             createdAt: Date.now()
         })
         .then(console.log('Posteado correctamente'))
@@ -27,19 +27,17 @@ class FormPostear extends Component {
 
     render(){
         return(
-            <View>
+            <View style = {styles.container}>
                 <Text> Posteo </Text>
                 <TextInput
                   style= {styles.input}
-                  onChangeText ={(texto) => this.setState({ post: texto})}
+                  onChangeText ={(texto) => this.setState({ textPost: texto})}
                   placeholder = 'postea'
                   keyboardType = 'default'
                   value = {this.state.textPost}
                   />
                 <TouchableOpacity
-                  style={ styles.button}
-                  
-                >
+                  style={ styles.button} onPress= {() => this.crearPost(auth.currentUser.email, this.state.textPost, Date.now())}>
                     <Text style = {styles.textButton}> Postear </Text>
                 </TouchableOpacity>
 
