@@ -32,7 +32,7 @@ class Register extends Component {
             this.setState({
                 errorMessage: "Tenes que ingresar una contraseña"
             })
-        }else if (pass < 6) {
+        }else if (pass.length < 6) {
             this.setState({
                 errorMessage: "La contraseña tiene que tener por lo menos 6 caracteres"
             })
@@ -112,6 +112,10 @@ class Register extends Component {
                 <TouchableOpacity style={styles.button} onPress={()=> this.register(this.state.email,this.state.password,this.state.userName)}>
                     <Text>Registrarse</Text>
                 </TouchableOpacity>
+                {this.state.errorMessage !== "" ?
+                    <Text>{this.state.errorMessage}</Text>
+                    : false
+                }
                 <TouchableOpacity onPress={()=>this.props.navigation.navigate("Login")}>
                     <Text>Ya tengo cuenta. Ir a login</Text>
                 </TouchableOpacity>
