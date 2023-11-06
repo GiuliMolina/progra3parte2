@@ -7,16 +7,16 @@ import {
   StyleSheet,
   FlatList 
 } from "react-native";
-import { auth } from "../../firebase/config";
-import Menu from "../../components/Menu/Menu";
+import { auth,db } from "../../firebase/config";
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
-      listaDePosteos: []
-
-    };
+      listaDePosteos: [],
+      usuario: auth.currentUser.email
+    }
+    // console.log(this.state.username)
   }
 
   // actualizarDatos(){
@@ -38,7 +38,7 @@ class Home extends Component {
   render() {
     return (
       <View style={Styles.container}>
-        <Text style={Styles.username}>Mateo</Text>
+        <Text style={Styles.username}>{ db.collection('users').username}</Text>
         {
                     this.state.listaDePosteos === 0 
                     ?

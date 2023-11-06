@@ -27,6 +27,7 @@ export default function App() {
       <Stack.Screen
         name="Menu"
         component ={Menu}
+        options = {{headerShown:false}}
         />
         {/* <Stack.Screen
         name="FromPostear"
