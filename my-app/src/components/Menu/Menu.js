@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Home from "../../screens/Home/Home";
-import User from "../../screens/User/User";
+import User from "../../screens/MiPerfil/MiPerfil";
 import FormPostear from "../../screens/FormPostear/FormPostear";
 import React,{Component} from "react";
 import {
