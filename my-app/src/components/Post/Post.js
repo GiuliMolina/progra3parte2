@@ -29,9 +29,23 @@ class Post extends Component {
             like: true,
             cantidadLikes: this.props.dataPost.datos.likes.length
         }))
+
+        .catch(error => console.log(error))
+    }
+
+    unLike(){
+        db.collection('post').doc(this.props.dataPost.id).update({
+            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+        })
+        .then(res => this.setState({
+            like: false,
+            cantidadLikes: this.props.dataPost.datos.likes.length
+        }))
+        .catch ( error => console.log(error))
     }
 
     render(){
+        console.log(this.props)
         return(
             <View>
                 <Text> Detalles del Post</Text>
@@ -39,7 +53,22 @@ class Post extends Component {
                 <Text> Texto:</Text>
                 <Text> Likes: </Text>
 
-                {this.state.like }
+                {
+                    this.state.like ?
+                     <TouchableOpacity
+                     
+                     style= {StyleSheet.button}
+                     onPress={() => this.unLike()}>
+
+                    </TouchableOpacity>
+                    :
+
+                    <TouchableOpacity 
+
+                    style= {StyleSheet.button}
+                    onPress={() => this.unLike()}></TouchableOpacity>
+                    
+                }
 
             </View>
         )
