@@ -7,6 +7,7 @@ import Home from "./src/screens/Home/Home"
 import Login from "./src/screens/Login/Login"
 import Register from "./src/screens/Register/Register"
 import FromPostear from "./src/screens/FormPostear/FormPostear"
+import User from "./src/screens/User/User"
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -14,9 +15,18 @@ export default function App() {
     <NavigationContainer style={styles.container}>
       <Stack.Navigator>
       <Stack.Screen
+        name="Login"
+        component ={Login}
+        options = {{headerShown:false}}
+        />
+        <Stack.Screen
+        name="Register"
+        component ={Register}
+        options = {{headerShown:false}}
+        />
+      <Stack.Screen
         name="Menu"
         component ={Menu}
-        options = {{headerShown:false}}
         />
       <Stack.Screen
         name="Home"
@@ -24,20 +34,15 @@ export default function App() {
         options = {{headerShown:true}}
         />
         <Stack.Screen
-        name="Login"
-        component ={Login}
-        options = {{headerShown:true}}
-        />
-        <Stack.Screen
-        name="Register"
-        component ={Register}
-        options = {{headerShown:true}}
-        />
-        <Stack.Screen
         name="FromPostear"
         component ={FromPostear}
-        options = {{headerShown:false}}
+        options = {{headerShown:true}}
         />
+        {/* <Stack.Screen
+        name="MiPerfil"
+        component ={User}
+        options = {{headerShown:true}}
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

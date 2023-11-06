@@ -13,10 +13,22 @@ import Menu from "../../components/Menu/Menu";
 class Home extends Component {
   constructor() {
     super();
-    this.state = {listaDePosteos: 1
+    this.state = {
+      listaDePosteos: []
 
     };
   }
+
+  // actualizarDatos(){
+  //   db.collection("Progra3proyecto2")
+  //   .doc(progra3proyecto2)
+  //   .update({
+  //       propiedad: firebase.firestore.FieldValue.arrayUnion("elemento a agregar al array")
+  //   })
+  //   .then({
+         //codigo a ejecutar
+  //   })
+  
 
   logout(){
     auth.signOut();
@@ -38,16 +50,15 @@ class Home extends Component {
                         renderItem={ ({item}) => <Post infoPost = { item } /> }
                     />
         }
-                 <TouchableOpacity onPress={()=>this.props.navigation.navigate("Login")}>
-                    <Text> Ir a login</Text>
+                 <TouchableOpacity onPress={()=>this.logout()}>
+                    <Text> Cerrar sesión</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")}>
+                {/* <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")}>
                     <Text> Ir a register</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
       </View>
     );
-  }
-}
+}}
 
 const Styles = StyleSheet.create({
     container: {
