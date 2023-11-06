@@ -2,7 +2,7 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
 
 import Home from "../../screens/Home/Home";
-import User from "../../screens/User/User";
+import User from "../../screens/MiPerfil/MiPerfil";
 import FormPostear from "../../screens/FormPostear/FormPostear";
 
 import react,{Component} from "react";

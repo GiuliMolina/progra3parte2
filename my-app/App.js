@@ -7,7 +7,7 @@ import Home from "./src/screens/Home/Home";
 import Login from "./src/screens/Login/Login";
 import Register from "./src/screens/Register/Register";
 import FromPostear from "./src/screens/FormPostear/FormPostear";
-import User from "./src/screens/User/User";
+import MiPerfil from "./src/screens/MiPerfil/MiPerfil";
 const Stack = createNativeStackNavigator();
 
 export default function App() {

@@ -59,6 +59,7 @@ class Post extends Component {
                      
                      style= {StyleSheet.button}
                      onPress={() => this.unLike()}>
+                        <Text style = {StyleSheet.textButton}> unLike</Text>
 
                     </TouchableOpacity>
                     :
@@ -66,7 +67,11 @@ class Post extends Component {
                     <TouchableOpacity 
 
                     style= {StyleSheet.button}
-                    onPress={() => this.unLike()}></TouchableOpacity>
+                    onPress={() => this.unLike()}>
+
+                        <Text style = {StyleSheet.textButton}> Like</Text>
+
+                    </TouchableOpacity>
                     
                 }
 
@@ -74,5 +79,21 @@ class Post extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        margin: 20
+    },
+    input:{
+        height: 20
+    },
+    button: {
+        backgroundColor: 'purple'
+    },
+    textButton: {
+        color: 'black'
+    }
+})
+
 
 export default Post;
