@@ -12,10 +12,10 @@ class MiPerfil extends Component{
     }
 
     render(){
-
+console.log(db.collection("users").userName)
         return(
             <View>
-                <Text> Mi perfil </Text>
+                <Text>{db.collection("users").onSnapshot(docs => )}</Text>
             </View>
         )
     }

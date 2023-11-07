@@ -33,15 +33,13 @@ export default function App() {
         name="FromPostear"
         component ={FromPostear}
         options = {{headerShown:true}}
-        /> 
-        <Stack.Screen
-
-        />
+        />  */}
+       
         <Stack.Screen
         name="MiPerfil"
-        component ={User}
+        component ={MiPerfil}
         options = {{headerShown:true}}
-        />  */}
+        /> 
       </Stack.Navigator>
     </NavigationContainer>
   );

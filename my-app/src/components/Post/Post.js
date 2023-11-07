@@ -21,28 +21,28 @@ class Post extends Component {
 
     }
 
-    likear(){
-        db.collection('post').doc(this.dataPost.id).update({
-            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
-        })
-        .then(res => this.setState({
-            like: true,
-            cantidadLikes: this.props.dataPost.datos.likes.length
-        }))
+    // likear(){
+    //     db.collection('post').doc(this.dataPost.id).update({
+    //         likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+    //     })
+    //     .then(res => this.setState({
+    //         like: true,
+    //         cantidadLikes: this.props.dataPost.datos.likes.length
+    //     }))
 
-        .catch(error => console.log(error))
-    }
+    //     .catch(error => console.log(error))
+    // }
 
-    unLike(){
-        db.collection('post').doc(this.props.dataPost.id).update({
-            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-        })
-        .then(res => this.setState({
-            like: false,
-            cantidadLikes: this.props.dataPost.datos.likes.length
-        }))
-        .catch ( error => console.log(error))
-    }
+    // unLike(){
+    //     db.collection('post').doc(this.props.dataPost.id).update({
+    //         likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+    //     })
+    //     .then(res => this.setState({
+    //         like: false,
+    //         cantidadLikes: this.props.dataPost.datos.likes.length
+    //     }))
+    //     .catch ( error => console.log(error))
+    // }
 
     render(){
         console.log(this.props)
