@@ -15,7 +15,7 @@ class MiPerfil extends Component{
 console.log(db.collection("users").userName)
         return(
             <View>
-                <Text>{db.collection("users").onSnapshot(docs => )}</Text>
+                <Text>{db.collection("users").onSnapshot()}</Text>
             </View>
         )
     }

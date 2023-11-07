@@ -16,19 +16,22 @@ class Home extends Component {
       listaDePosteos: [],
       usuario: auth.currentUser.email
     }
-    // console.log(this.state.username)
   }
 
-  // actualizarDatos(){
-  //   db.collection("Progra3proyecto2")
-  //   .doc(progra3proyecto2)
-  //   .update({
-  //       propiedad: firebase.firestore.FieldValue.arrayUnion("elemento a agregar al array")
-  //   })
-  //   .then({
-         //codigo a ejecutar
-  //   })
-  
+  componentDidMount(){
+    db.collection('posts').onSnapshot(
+      docs =>{
+        let ahoraUsuario = [];
+        docs.forEach(doc=> {
+          ahoraUsuario.push({
+          id: doc.id,
+			    data: doc.data()
+          })
+        })
+
+      }
+    )}
+     
 
   logout(){
     auth.signOut();
@@ -36,9 +39,10 @@ class Home extends Component {
   }
 
   render() {
+    console.log( db.collection('users').userName)
     return (
       <View style={Styles.container}>
-        <Text style={Styles.username}>{ db.collection('users').username}</Text>
+        <Text style={Styles.username}>{ db.collection('users').onSnapshot}</Text>
         {
                     this.state.listaDePosteos === 0 
                     ?
