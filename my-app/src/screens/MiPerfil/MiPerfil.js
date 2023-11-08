@@ -7,15 +7,34 @@ class MiPerfil extends Component{
     constructor(){
         super();
         this.state ={
-            algo : ""
+            algo : "",
+            data: []
         }
     }
 
+    componentDidMount(){
+        db.collection('users').onSnapshot(
+            docs => {
+                let user = [];
+                docs.forEach(doc => {
+                    user.push({
+                        id: doc.id,
+			            data: doc.data()
+                    }) 
+                })
+                this.setState({
+                    data : user
+                })
+            }
+
+        )
+    }
+
     render(){
-console.log(db.collection("users").userName)
+    console.log(this.state.data)
         return(
             <View>
-                <Text>{db.collection("users").onSnapshot()}</Text>
+                <Text> {this.state.data.userName}</Text>
             </View>
         )
     }
