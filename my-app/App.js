@@ -29,11 +29,11 @@ export default function App() {
         component ={Menu}
         options = {{headerShown:false}}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
         name="FromPostear"
         component ={FromPostear}
         options = {{headerShown:true}}
-        />  */}
+        />
        
         <Stack.Screen
         name="MiPerfil"
