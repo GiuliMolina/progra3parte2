@@ -44,8 +44,8 @@ class Home extends Component {
   render() {
     return (
       <View style={Styles.container}>
-        <Text style={Styles.username}></Text>
-        <Img></Img>
+        <Text style={Styles.username}> Hola</Text>
+        <Img source={required(this.state.foto)} resizeMode="contain"></Img>
         {
                     this.state.usuarios.length === 0
                     ?

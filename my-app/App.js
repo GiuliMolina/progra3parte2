@@ -34,7 +34,6 @@ export default function App() {
         component ={FromPostear}
         options = {{headerShown:true}}
         /> 
-       
         <Stack.Screen
         name="MiPerfil"
         component ={MiPerfil}

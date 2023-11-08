@@ -61,7 +61,9 @@ class Register extends Component {
             })
             .catch(error => {
                 console.log(error)
-                ;
+                if(error.code == 'auth/email-already-in-use'){
+                    this.setState({ errorMessage: "El email ingresado ya existe"})
+                }
             })
         }}
 

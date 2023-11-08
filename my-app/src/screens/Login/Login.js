@@ -60,12 +60,12 @@ class Login extends Component {
             .catch((error) => {
                 console.log(error.code)
                 if(error.code == 'auth/internal-error'){
-                    this.setState={ errorMessage: "El email o la contraseña ingresado no existe"}
+                    this.setState({ errorMessage: "El email o la contraseña ingresado no existe"})
                 } else if (error.code =='auth/invalid-email'){
-                    this.setState={ errorMessage: "El email es invalido "}
-                }// }else if(error.code==="auth/too-many-requests"){
-                //     this.setState={ errorMessage: "Esta haciendo muchos pedidos"}
-                // };
+                    this.setState({ errorMessage: "El email es invalido "})
+                }else if(error.code == "auth/too-many-requests"){
+                    this.setState({ errorMessage: "Esta haciendo muchos pedidos"})
+                }
             });
         } 
     }
