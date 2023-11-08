@@ -14,12 +14,14 @@ class Home extends Component {
     super();
     this.state = {
       listaDePosteos: [],
-      usuario: auth.currentUser.email
+      usuario: auth.currentUser.email,
+      usuarios: [],
+      foto:""
     }
   }
 
   componentDidMount(){
-    db.collection('posts').onSnapshot(
+    db.collection('users').where("owner","==",this.state.usuario).onSnapshot(
       docs =>{
         let ahoraUsuario = [];
         docs.forEach(doc=> {
@@ -28,6 +30,7 @@ class Home extends Component {
 			    data: doc.data()
           })
         })
+        this.setState({usuarios: ahoraUsuario})
 
       }
     )}
@@ -39,20 +42,24 @@ class Home extends Component {
   }
 
   render() {
-    console.log( db.collection('users').userName)
     return (
       <View style={Styles.container}>
-        <Text style={Styles.username}>{ db.collection('users').onSnapshot}</Text>
+        <Text style={Styles.username}></Text>
+        <Img></Img>
         {
-                    this.state.listaDePosteos === 0 
+                    this.state.usuarios.length === 0
                     ?
                     <Text>Cargando...</Text>
                     :
                     <FlatList 
-                        data= {this.state.listaPost}
+                        data= {this.state.usuarios}
                         keyExtractor={ unPost => unPost.id }
-                        renderItem={ ({item}) => <Post infoPost = { item } /> }
+                        renderItem={ ({item}) => {this.setState({foto: item.data.urlImagen})}
+                     
+                        
+                       }
                     />
+                    // <Post infoPost = { item } />
         }
                  <TouchableOpacity onPress={()=>this.logout()}>
                     <Text> Cerrar sesión</Text>
