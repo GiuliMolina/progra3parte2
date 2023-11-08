@@ -5,7 +5,8 @@ import {
   View,
   Text,
   StyleSheet,
-  FlatList 
+  FlatList,
+  Image 
 } from "react-native";
 import { auth,db } from "../../firebase/config";
 
@@ -42,8 +43,10 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.state.foto)
     return (
       <View style={Styles.container}>
+        <Image styles={Styles.image} source={this.state.foto}/>
         <Text style={Styles.username}> Hola</Text>
         {/* {this.state.foto !== "" ? 
         <Img source={required(this.state.foto)} resizeMode="contain"></Img> : 
@@ -67,6 +70,7 @@ class Home extends Component {
         }
                  <TouchableOpacity onPress={()=>this.logout()}>
                     <Text> Cerrar sesión</Text>
+                    <Image styles={Styles.image} source={require("../../../assets/favicon.png")} resizeMode="center"/>
                 </TouchableOpacity>
                 {/* <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")}>
                     <Text> Ir a register</Text>
