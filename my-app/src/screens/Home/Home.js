@@ -47,11 +47,13 @@ class Home extends Component {
     return (
       <View style={Styles.container}>
         <Image styles={Styles.image} source={this.state.foto}/>
+        <Image
+        style = {Styles.image}
+        source={{
+          uri: this.state.foto,}}
+        resizeMode="contain"
+      />
         <Text style={Styles.username}> Hola</Text>
-        {/* {this.state.foto !== "" ? 
-        <Img source={required(this.state.foto)} resizeMode="contain"></Img> : 
-        false
-        } */}
         
         {
                     this.state.usuarios.length === 0
@@ -72,9 +74,6 @@ class Home extends Component {
                     <Text> Cerrar sesión</Text>
                     <Image styles={Styles.image} source={require("../../../assets/favicon.png")} resizeMode="center"/>
                 </TouchableOpacity>
-                {/* <TouchableOpacity onPress={()=>this.props.navigation.navigate("Menu")}>
-                    <Text> Ir a register</Text>
-                </TouchableOpacity> */}
       </View>
     );
 }}
