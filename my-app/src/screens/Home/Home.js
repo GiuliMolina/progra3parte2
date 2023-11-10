@@ -51,7 +51,7 @@ class Home extends Component {
         style = {Styles.image}
         source={{
           uri: this.state.foto,}}
-        resizeMode="contain"
+        resizeMode="center"
       />
         <Text style={Styles.username}> Hola</Text>
         
@@ -102,8 +102,8 @@ const Styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 300,
-    resizeMode: 'cover',
+    height: 500,
+    resizeMode: 'center',
   },
   actions: {
     flexDirection: 'row',
