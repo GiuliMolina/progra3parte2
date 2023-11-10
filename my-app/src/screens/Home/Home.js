@@ -17,7 +17,8 @@ class Home extends Component {
       listaDePosteos: [],
       usuario: auth.currentUser.email,
       usuarios: [],
-      foto:""
+      foto:"",
+      nombreDeUsuario:null
     }
   }
 
@@ -47,11 +48,11 @@ class Home extends Component {
     return (
       <View style={Styles.container}>
         <Image styles={Styles.image} source={this.state.foto}/>
+        <Text style={Styles.username}>{this.state.nombreDeUsuario}</Text>
         <Image
         style = {Styles.image}
         source={{
           uri: this.state.foto,}}
-        resizeMode="center"
       />
         <Text style={Styles.username}> Hola</Text>
         
@@ -63,7 +64,9 @@ class Home extends Component {
                     <FlatList 
                         data= {this.state.usuarios}
                         keyExtractor={ unPost => unPost.id }
-                        renderItem={ ({item}) => {this.setState({foto: item.data.urlImagen})}
+                        renderItem={ ({item}) => {this.setState({foto: item.data.urlImagen,
+                          nombreDeUsuario: item.data.userName}
+                          )}
                      
                         
                        }
@@ -101,9 +104,11 @@ const Styles = StyleSheet.create({
     marginRight: 10,
   },
   image: {
-    width: '100%',
-    height: 500,
-    resizeMode: 'center',
+    width: 50,
+    height: 50,
+    borderRadius: 25, // Mitad del ancho o alto para hacerlo circular
+    borderWidth: 2,
+    borderColor: '#fff'
   },
   actions: {
     flexDirection: 'row',
