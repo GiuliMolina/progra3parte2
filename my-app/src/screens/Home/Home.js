@@ -53,13 +53,14 @@ class Home extends Component {
     console.log(this.state.foto)
     return (
       <View style={Styles.container}>
-        <Image styles={Styles.image} source={this.state.foto}/>
-        <Text style={Styles.username}>{this.state.nombreDeUsuario}</Text>
+         <View style={Styles.header}>
         <Image
-        style = {Styles.image}
+        style = {Styles.profileImage}
         source={{
           uri: this.state.foto,}}
       />
+       <Text style={Styles.username}>{this.state.nombreDeUsuario}</Text>
+       </View>
         
         {
                     this.state.usuarios.length === 0
@@ -77,16 +78,8 @@ class Home extends Component {
                        }
                     />
         }
-          <TextInput
-                    style={Styles.input}
-                    onChangeText={(text)=>this.setState({comentario:text})}
-                    placeholder = "Comentarios"
-                    keyBoardType="default"
-                    value = {this.state.comentario}
-                />
                  <TouchableOpacity onPress={()=>this.logout()}>
                     <Text> Cerrar sesión</Text>
-                    <Image styles={Styles.image} source={require("../../../assets/favicon.png")} resizeMode="center"/>
                 </TouchableOpacity>
       </View>
     );
@@ -114,12 +107,13 @@ const Styles = StyleSheet.create({
     fontWeight: 'bold',
     marginRight: 10,
   },
-  image: {
+  profileImage: {
     width: 50,
     height: 50,
-    borderRadius: 25, // Mitad del ancho o alto para hacerlo circular
+    borderRadius: 25,
     borderWidth: 2,
-    borderColor: '#fff'
+    borderColor: '#fff',
+    marginRight: 10, 
   },
   actions: {
     flexDirection: 'row',
