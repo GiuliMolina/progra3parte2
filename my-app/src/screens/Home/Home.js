@@ -18,8 +18,14 @@ class Home extends Component {
       usuario: auth.currentUser.email,
       usuarios: [],
       foto:"",
-      nombreDeUsuario:null
+      nombreDeUsuario:null,
+      comentario:""
     }
+  }
+  comentarios(){
+    db.collection("posts").add({
+      
+    })
   }
 
   componentDidMount(){
@@ -54,7 +60,6 @@ class Home extends Component {
         source={{
           uri: this.state.foto,}}
       />
-        <Text style={Styles.username}> Hola</Text>
         
         {
                     this.state.usuarios.length === 0
@@ -71,8 +76,14 @@ class Home extends Component {
                         
                        }
                     />
-                    // <Post infoPost = { item } />
         }
+          <TextInput
+                    style={Styles.input}
+                    onChangeText={(text)=>this.setState({comentario:text})}
+                    placeholder = "Comentarios"
+                    keyBoardType="default"
+                    value = {this.state.comentario}
+                />
                  <TouchableOpacity onPress={()=>this.logout()}>
                     <Text> Cerrar sesión</Text>
                     <Image styles={Styles.image} source={require("../../../assets/favicon.png")} resizeMode="center"/>
