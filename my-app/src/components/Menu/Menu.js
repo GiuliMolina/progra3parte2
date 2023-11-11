@@ -22,7 +22,7 @@ class Menu extends Component{
 render(){
     return (
           <Tab.Navigator>
-             <Tab.Screen name="Home" component={ Home } />
+             <Tab.Screen name="Home" component={ Home } options = {{headerShown:true}}/>
              <Tab.Screen name="FromPostear" component={ FormPostear } />
              <Tab.Screen name="MiPerfil" component ={MiPerfil}/>
           </Tab.Navigator>

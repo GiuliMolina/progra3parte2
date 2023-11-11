@@ -59,7 +59,10 @@ class Home extends Component {
         source={{
           uri: this.state.foto,}}
       />
+     <TouchableOpacity      onPress={()=>this.props.navigation.navigate("MiPerfil")}>
        <Text style={Styles.username}>{this.state.nombreDeUsuario}</Text>
+      </TouchableOpacity>
+
        </View>
         
         {
