@@ -15,10 +15,10 @@ class FormPostear extends Component {
 
 
 
-    posteo(owner, textPost, createdAt){
+    posteo(){
         db.collection('posts').add({
             owner: auth.currentUser.email,
-            textPost: this.state.post,
+            textPost: this.state.textPost,
             createdAt: Date.now()
         })
         .then(console.log('Posteado correctamente'))

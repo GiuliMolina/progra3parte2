@@ -21,7 +21,7 @@ class Login extends Component {
     componentDidMount() { //remember me 
         auth.onAuthStateChanged((user) => {
             if (user) {
-                this.props.navigation.navigate("Home")
+                this.props.navigation.navigate("Menu")
             }
         });
     }

@@ -6,7 +6,7 @@ import Menu from './src/components/Menu/Menu';
 import Home from "./src/screens/Home/Home";
 import Login from "./src/screens/Login/Login";
 import Register from "./src/screens/Register/Register";
-import FromPostear from "./src/screens/FormPostear/FormPostear";
+import FormPostear from './src/screens/FormPostear/FormPostear';
 import MiPerfil from "./src/screens/MiPerfil/MiPerfil";
 const Stack = createNativeStackNavigator();
 
@@ -30,18 +30,13 @@ export default function App() {
         options = {{headerShown:false}}
         />
         <Stack.Screen
-        name="FromPostear"
-        component ={FromPostear}
+        name="FormPostear"
+        component ={FormPostear}
         options = {{headerShown:true}}
         /> 
         <Stack.Screen
         name="MiPerfil"
         component ={MiPerfil}
-        options = {{headerShown:true}}
-        /> 
-        <Stack.Screen
-        name="Home"
-        component ={Home}
         options = {{headerShown:true}}
         /> 
       </Stack.Navigator>

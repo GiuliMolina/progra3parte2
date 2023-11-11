@@ -42,7 +42,7 @@ class Register extends Component {
     
                 db.collection('users').add({
                     owner: auth.currentUser.email,
-                    userName: userName, 
+                    userName: this.state.userName, 
                     password: this.state.password,
                     miniBio: this.state.miniBio,
                     urlImagen: this.state.urlImagen,
