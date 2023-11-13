@@ -24,6 +24,7 @@ class FormPostear extends Component {
         db.collection('posts').add({
             owner: auth.currentUser.email,
             textPost: this.state.textPost,
+            comentarios:{},
             createdAt: Date.now()
         })
         .then(console.log('Posteado correctamente'))
@@ -42,7 +43,7 @@ class FormPostear extends Component {
                   value = {this.state.textPost}
                   />
                 <TouchableOpacity
-                  style={ styles.button} onPress= {() => this.crearPost(auth.currentUser.email, this.state.textPost, Date.now())}>
+                  style={ styles.button} onPress= {() => this.posteo(auth.currentUser.email, this.state.textPost, Date.now())}>
                     <Text style = {styles.textButton}> Postear </Text>
                 </TouchableOpacity>
 
