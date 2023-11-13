@@ -44,13 +44,13 @@ class BusquedaUsuarios extends Component {
         return (
             <View>
                 <TextInput
-                    style={Styles.input}
+                    style={styles.input}
                     onChangeText={(text) => this.setState({ campoBusqueda: text })}
                     placeholder="userName"
                     keyboardType="default"
                     value={this.state.campoBusqueda}
                 />
-                <TouchableOpacity style={Styles.button} onPress={() => this.busqueda()}>
+                <TouchableOpacity style={styles.button} onPress={() => this.busqueda()}>
                     <Text>Buscar</Text>
                 </TouchableOpacity>
                 <Text> Resultados de busqueda para: {this.state.campoBusqueda}</Text>
@@ -80,7 +80,7 @@ class BusquedaUsuarios extends Component {
 
                         <Text>Email:{this.state.email}</Text>
                         <Text>Nombre de usuario:{this.state.nombreDeUsuario}</Text>
-                        {/* <Image style={Styles.image} source={{uri: this.state.foto,}}/> */}
+                        {/* <Image style={styles.image} source={{uri: this.state.foto,}}/> */}
                         <Text>Bio:{this.state.miniBio}</Text>
                     </View>
                     : <Text> El nombre de usuario ingresado no existe </Text>
@@ -95,7 +95,7 @@ class BusquedaUsuarios extends Component {
     }
 }
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
     formContainer: {
         paddingHorizontal: 10,
         marginTop: 20

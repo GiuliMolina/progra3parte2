@@ -26,20 +26,6 @@ class Home extends Component {
     }
   }
 
-  comentar(comentario){
-    db.collection("posts").doc().update(
-      docs =>{
-        let posteosQuieroMostarr = [];
-        docs.forEach(doc=> {
-          posteosQuieroMostarr.push({
-          id: doc.id,
-			    data: doc.data()
-          })
-        })
-        this.setState({posteo: posteosQuieroMostarr})
-      }
-    )
-  }
   componentDidMount(){
     db.collection('users').where("owner","==",this.state.usuario).onSnapshot(
       docs =>{
@@ -93,25 +79,18 @@ class Home extends Component {
         source={{
           uri: this.state.fotito}}
       />
-       <TextInput
-                style={Styles.input}
-                onPress={(texto) => this.setState({comentario:texto})}
-                placeholder="Agregar comentario"
-                keyboardType="default"
-                value={this.state.comentario}
-                />
         {
                     this.state.usuarios.length === 0
                     ?
-                    <Text>Cargando...</Text>
+                    <Text> Cargando... </Text>
                     :
                     <FlatList 
                         data= {this.state.usuarios}
                         keyExtractor={ pepe => pepe.id }
-                        renderItem={ ({item}) => <Post dataPost={item}></Post>}
+                        renderItem={ ({item}) =>  {this.setState({foto: item.data.urlImagen,
+                          nombreDeUsuario: item.data.userName})}}
                      
                         
-                       
                     />
         }
           {
@@ -122,12 +101,11 @@ class Home extends Component {
                     <FlatList 
                         data= {this.state.posteo}
                         keyExtractor={ unPost => unPost.id }
-                        renderItem={ ({item}) => {this.setState({fotito: item.data.textPost,
-                          }
-                          )}
+                        renderItem={ ({item}) => <Post dataPost={item}></Post>
+                        }
                      
                         
-                       }
+                       
                     />
         }
                  <TouchableOpacity onPress={()=>this.logout()}>
