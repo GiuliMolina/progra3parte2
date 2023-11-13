@@ -42,16 +42,16 @@ class Home extends Component {
       }
     )
 
-    db.collection("posts").where("owner", "==",this.state.usuario).onSnapshot(
+    db.collection("posts").orderBy("createdAt","desc").onSnapshot(
       docs =>{
-        let posteosQuieroMostarr = [];
+        let posteosQuieroMostar = [];
         docs.forEach(doc=> {
-          posteosQuieroMostarr.push({
+          posteosQuieroMostar.push({
           id: doc.id,
 			    data: doc.data()
           })
         })
-        this.setState({posteo: posteosQuieroMostarr})
+        this.setState({listaDePosteos: posteosQuieroMostar})
       }
     )
   }
@@ -62,50 +62,36 @@ class Home extends Component {
     this.props.navigation.navigate("Login")
   }
 
+
   render() {
-    
+
     return (
       <View style={Styles.container}>
-         <View style={Styles.header}>
-        <Image
-        style = {Styles.profileImage}
-        source={{
-          uri: this.state.foto}}
-      />
-     <TouchableOpacity onPress={()=>this.props.navigation.navigate("MiPerfil")}>
-       <Text style={Styles.username}>{this.state.nombreDeUsuario}</Text>
-      </TouchableOpacity>
-       </View> 
-       <Image
-        style = {Styles.postImage}
-        source={{
-          uri: this.state.fotito}}
-      />
-        {
+         {
                     this.state.usuarios.length === 0
                     ?
                     <Text> Cargando... </Text>
                     :
-                    <FlatList 
-                        data= {this.state.usuarios}
-                        keyExtractor={ pepe => pepe.id }
-                        renderItem={ ({item}) =>  {this.setState({foto: item.data.urlImagen,
-                          nombreDeUsuario: item.data.userName})}}
+                    // <FlatList 
+                    //     data= {this.state.usuarios}
+                    //     keyExtractor={ pepe => pepe.id }
+                    //     renderItem={ ({item}) =>  {this.setState({foto: item.data.urlImagen,
+                    //       nombreDeUsuario: item.data.userName})}}
                      
                         
-                    />
-                    
+                    // />
+                    <Text> Hola </Text>
+          }
 
-        }
           {
-                    this.state.posteo.length === 0
+                    this.state.listaDePosteos.length === 0
                     ?
                     <Text>Cargando...</Text>
                     :
                     <FlatList 
-                        data= {this.state.posteo}
+                        data= {this.state.listaDePosteos}
                         keyExtractor={ unPost => unPost.id }
-                        renderItem={ ({item}) => <Post dataPost={item}></Post>
+                        renderItem={ ({item}) => <Post dataPost={item} navigation={this.props.navigation}/>
                         }
                      
                         
