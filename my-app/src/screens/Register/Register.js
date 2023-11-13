@@ -49,7 +49,7 @@ class Register extends Component {
                     createdAt: Date.now(),
                 });
             })
-            .then( (res)=>{
+            .then( (response)=>{
                 this.setState({
                     email:"",
                     password:"",
@@ -57,7 +57,7 @@ class Register extends Component {
                     miniBio:"",
                     urlImagen:""
                 }),
-                this.props.navigation.navigate("Menu")
+                this.props.navigation.navigate("Login")
             })
             .catch(error => {
                 console.log(error)

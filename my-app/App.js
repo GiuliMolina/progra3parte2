@@ -8,6 +8,8 @@ import Login from "./src/screens/Login/Login";
 import Register from "./src/screens/Register/Register";
 import FormPostear from './src/screens/FormPostear/FormPostear';
 import MiPerfil from "./src/screens/MiPerfil/MiPerfil";
+import BusquedaUsuarios from "./src/screens/BusquedaUsuarios/BusquedaUsuarios";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -30,15 +32,20 @@ export default function App() {
         options = {{headerShown:false}}
         />
         <Stack.Screen
-        name="FormPostear"
+        name="Postear"
         component ={FormPostear}
         options = {{headerShown:true}}
         /> 
         <Stack.Screen
-        name="MiPerfil"
+        name="Mi perfil"
         component ={MiPerfil}
         options = {{headerShown:true}}
         /> 
+        <Stack.Screen
+        name="Busqueda de usuarios"
+        component ={BusquedaUsuarios}
+        options = {{headerShown:true}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -10,6 +10,7 @@ import {
 import Home from "../../screens/Home/Home";
 import MiPerfil from "../../screens/MiPerfil/MiPerfil";
 import FormPostear from "../../screens/FormPostear/FormPostear";
+import BusquedaUsuarios from "../../screens/BusquedaUsuarios/BusquedaUsuarios";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,8 +24,9 @@ render(){
     return (
           <Tab.Navigator>
              <Tab.Screen name="Home" component={ Home } options = {{headerShown:true}}/>
-             <Tab.Screen name="FromPostear" component={ FormPostear } />
-             <Tab.Screen name="MiPerfil" component ={MiPerfil}/>
+             <Tab.Screen name="Postear" component={ FormPostear } />
+             <Tab.Screen name="Mi perfil" component ={MiPerfil}/>
+             <Tab.Screen name ="Busqueda de usuarios" component={BusquedaUsuarios}/>
           </Tab.Navigator>
      );
      
