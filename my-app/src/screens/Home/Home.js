@@ -18,15 +18,13 @@ class Home extends Component {
       usuario: auth.currentUser.email,
       usuarios: [],
       foto:"",
+      fotito:"",
       nombreDeUsuario:null,
-      comentario:""
+      comentario:"",
+      posteo:[]
     }
   }
-  comentarios(){
-    db.collection("posts").add({
-      
-    })
-  }
+
 
   componentDidMount(){
     db.collection('users').where("owner","==",this.state.usuario).onSnapshot(
@@ -41,30 +39,57 @@ class Home extends Component {
         this.setState({usuarios: ahoraUsuario})
 
       }
-    )}
-     
+    )
 
+    db.collection("posts").where("owner", "==",this.state.usuario).onSnapshot(
+      docs =>{
+        let posteosQuieroMostarr = [];
+        docs.forEach(doc=> {
+          posteosQuieroMostarr.push({
+          id: doc.id,
+			    data: doc.data()
+          })
+        })
+        this.setState({posteo: posteosQuieroMostarr})
+      }
+    )
+  }
+
+  comentario(){
+    db.collection('posts').update({
+        comentarios:this.state.comentario
+        
+    })
+    .then(console.log('Posteado correctamente'))
+    .catch(e => console.log(`Se ha producido un error : ${e}`))
+}
+
+
+     
   logout(){
     auth.signOut();
     this.props.navigation.navigate("Login")
   }
 
   render() {
-    console.log(this.state.foto)
+    console.log(this.state.comentario)
     return (
       <View style={Styles.container}>
          <View style={Styles.header}>
         <Image
         style = {Styles.profileImage}
         source={{
-          uri: this.state.foto,}}
+          uri: this.state.foto}}
       />
-     <TouchableOpacity      onPress={()=>this.props.navigation.navigate("MiPerfil")}>
+     <TouchableOpacity onPress={()=>this.props.navigation.navigate("MiPerfil")}>
        <Text style={Styles.username}>{this.state.nombreDeUsuario}</Text>
       </TouchableOpacity>
-
-       </View>
-        
+       </View> 
+       <Image
+        style = {Styles.postImage}
+        source={{
+          uri: this.state.fotito}}
+      />
         {
                     this.state.usuarios.length === 0
                     ?
@@ -72,7 +97,7 @@ class Home extends Component {
                     :
                     <FlatList 
                         data= {this.state.usuarios}
-                        keyExtractor={ unPost => unPost.id }
+                        keyExtractor={ pepe => pepe.id }
                         renderItem={ ({item}) => {this.setState({foto: item.data.urlImagen,
                           nombreDeUsuario: item.data.userName}
                           )}
@@ -81,6 +106,28 @@ class Home extends Component {
                        }
                     />
         }
+          {
+                    this.state.posteo.length === 0
+                    ?
+                    <Text>Cargando...</Text>
+                    :
+                    <FlatList 
+                        data= {this.state.posteo}
+                        keyExtractor={ unPost => unPost.id }
+                        renderItem={ ({item}) => {this.setState({fotito: item.data.textPost,
+                          }
+                          )}
+                     
+                        
+                       }
+                    />
+        }
+                <TextInput
+                onChangeText={(text)=>this.setState({comentario:text})}
+                placeholder="Agregar comentario"
+                keyBoardType="default"
+                value={this.state.comentario}
+                />
                  <TouchableOpacity onPress={()=>this.logout()}>
                     <Text> Cerrar sesión</Text>
                 </TouchableOpacity>
@@ -118,10 +165,10 @@ const Styles = StyleSheet.create({
     borderColor: '#fff',
     marginRight: 10, 
   },
-  actions: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-}
+  postImage: {
+    width: '100%', 
+    height: 200,
+  }
 
 })
 
