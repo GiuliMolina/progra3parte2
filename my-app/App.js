@@ -7,7 +7,7 @@ import Login from "./src/screens/Login/Login";
 import Register from "./src/screens/Register/Register";
 import FormPostear from './src/screens/FormPostear/FormPostear';
 import MiPerfil from "./src/screens/MiPerfil/MiPerfil";
-import BusquedaUsuarios from "./src/screens/BusquedaUsuarios/BusquedaUsuarios";
+import Buscador from "./src/screens/Buscador/Buscador";
 
 const Stack = createNativeStackNavigator();
 
@@ -41,8 +41,8 @@ export default function App() {
         options = {{headerShown:true}}
         /> 
         <Stack.Screen
-        name="Busqueda de usuarios"
-        component ={BusquedaUsuarios}
+        name="Buscador"
+        component ={Buscador}
         options = {{headerShown:true}}
         />
       </Stack.Navigator>

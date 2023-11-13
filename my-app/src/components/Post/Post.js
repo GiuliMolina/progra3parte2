@@ -54,7 +54,6 @@ class Post extends Component {
     // }
 
     render() {
-        console.log(this.props)
         return (
             <View>
                 <Text> Detalles del Post</Text>
