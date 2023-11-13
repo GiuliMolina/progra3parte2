@@ -35,8 +35,9 @@ class Home extends Component {
           id: doc.id,
 			    data: doc.data()
           })
+          this.setState({usuarios: ahoraUsuario})
         })
-        this.setState({usuarios: ahoraUsuario})
+        
 
       }
     )
@@ -63,23 +64,25 @@ class Home extends Component {
 
 
   render() {
-    console.log(this.state.listaDePosteos)
+
     return (
       <View style={Styles.container}>
-      {/*   {
+         {
                     this.state.usuarios.length === 0
                     ?
                     <Text> Cargando... </Text>
                     :
-                    <FlatList 
-                        data= {this.state.usuarios}
-                        keyExtractor={ pepe => pepe.id }
-                        renderItem={ ({item}) =>  {this.setState({foto: item.data.urlImagen,
-                          nombreDeUsuario: item.data.userName})}}
+                    // <FlatList 
+                    //     data= {this.state.usuarios}
+                    //     keyExtractor={ pepe => pepe.id }
+                    //     renderItem={ ({item}) =>  {this.setState({foto: item.data.urlImagen,
+                    //       nombreDeUsuario: item.data.userName})}}
                      
                         
-                    />
-        } */}
+                    // />
+                    <Text> Hola </Text>
+          }
+
           {
                     this.state.listaDePosteos.length === 0
                     ?

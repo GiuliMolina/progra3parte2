@@ -30,10 +30,23 @@ class Camera extends Component{
 
         return(
             <Text>
-                
+
             </Text>
         )
     }
 }
 
 export default Camera;
+
+{/* <TextInput
+                    style={styles.input}
+                    onChangeText={(text)=>this.setState({nuevaPassword:text})}
+                    placeholder = "password"
+                    keyBoardType="default"
+                    value = {this.state.nuevaPassword}
+                />  */}
+
+                {/* <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => this.cambiarPass()}
+                ></TouchableOpacity> */}
