@@ -34,6 +34,11 @@ class MiPerfil extends Component {
         )
     }
 
+    logout(){
+        auth.signOut();
+        this.props.navigation.navigate('Login');
+    }
+
     // cambiarPass() {
     //    auth
     //    .updatePassword(user, newPassword)
@@ -48,6 +53,7 @@ class MiPerfil extends Component {
     // }
 
     render() {
+        
         return (
             <View>
                 <Text>{this.state.nombreDeUsuario}</Text>
@@ -79,6 +85,36 @@ class MiPerfil extends Component {
 }
 
 const styles = StyleSheet.create({
+
+    conteiner : {
+        height: 200
+    },
+    username: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginRight: 10,
+    },
+    input: {
+        height: 20, 
+        paddingVertical: 15, 
+        paddingHorizontal:10,
+        borderWidth: 1, 
+        borderColor: "#ccc",
+        borderStyle: 6, 
+        marginVertical: 10, 
+    },
+    profileImage: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        borderWidth: 2,
+        borderColor: '#fff',
+        marginRight: 10, 
+    },
+    postImage: {
+        width: '100%', 
+        height: 200,
+    },
 
     input: {
         height: 20, 
