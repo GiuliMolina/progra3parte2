@@ -35,8 +35,9 @@ class Home extends Component {
           id: doc.id,
 			    data: doc.data()
           })
+          this.setState({usuarios: ahoraUsuario})
         })
-        this.setState({usuarios: ahoraUsuario})
+        
 
       }
     )
@@ -62,6 +63,7 @@ class Home extends Component {
   }
 
   render() {
+    
     return (
       <View style={Styles.container}>
          <View style={Styles.header}>
@@ -92,6 +94,8 @@ class Home extends Component {
                      
                         
                     />
+                    
+
         }
           {
                     this.state.posteo.length === 0

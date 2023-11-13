@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { auth, db } from '../../firebase/config';
 import { updatePassword } from "firebase/auth";
-import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList} from "react-native";
+import {TextInput, TouchableOpacity, View, Text, StyleSheet, Image, FlatList} from "react-native";
 
 
 
@@ -9,11 +9,14 @@ class MiPerfil extends Component {
     constructor() {
         super();
         this.state = {
-            algo: "",
+            foto: "",
             data: [],
             nuevaPassword:"",
-            nombreDeUsuario: ""
+            nombreDeUsuario: "",
+            usuarioLogueado: auth.currentUser.email,
+            owners: [],
         }
+        console.log(owner)
     }
 
     componentDidMount() {
@@ -27,11 +30,24 @@ class MiPerfil extends Component {
                     })
                 })
                 this.setState({
-                    data: user
+                    data: user,
                 })
             }
 
         )
+
+        db.collection("posts").where("owner", "==",auth.currentUser.email).onSnapshot(
+            docs =>{
+              let posteosQuieroMostrar = [];
+              docs.forEach(doc=> {
+                posteosQuieroMostrar.push({
+                    id: doc.id,
+                    data: doc.data()
+                })
+              })
+              this.setState({posteo: posteosQuieroMostrar})
+            }
+          )
     }
 
     logout(){
@@ -53,31 +69,43 @@ class MiPerfil extends Component {
     // }
 
     render() {
+        console.log(this.state.data)
+        console.log(this.state.usuarioLogueado)
         
         return (
             <View>
-                <Text>{this.state.nombreDeUsuario}</Text>
-                <FlatList 
-                        data= {this.state.data}
-                        keyExtractor={ pepe => pepe.id }
-                        renderItem={ ({item}) => {this.setState({
-                            nombreDeUsuario: item.data.userName}
-                          )}
-                     
-                        
-                       }
-                    />
-                {/* <TextInput
-                    style={styles.input}
-                    onChangeText={(text)=>this.setState({nuevaPassword:text})}
-                    placeholder = "password"
-                    keyBoardType="default"
-                    value = {this.state.nuevaPassword}
-                />  */}
-                {/* <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => this.cambiarPass()}
-                ></TouchableOpacity> */}
+                <Text></Text>
+            {
+                this.state.data ==! this.state.usuarioLogueado
+                ?
+                <Text> Cargando...</Text>
+                
+                :
+
+                <View> 
+                
+                <Text> {this.state.data.userName}</Text>
+                <Text> {this.state.usuarioLogueado}</Text>
+                {/* <Image style = {Styles.profileImage}
+                    src={{uri: this.state.data.urlImage}}
+                /> */}
+                </View>
+                
+
+                
+                
+                // <FlatList 
+                // data= {this.state.data}
+                // keyExtractor={ user => user.id }
+                // renderItem={ ({item}) => {this.setState({
+                //     owners: item.data.owner})}
+                // }
+                // />
+
+            }
+
+            
+
             </View>
             
         )
@@ -87,7 +115,8 @@ class MiPerfil extends Component {
 const styles = StyleSheet.create({
 
     conteiner : {
-        height: 200
+        flex: 1,
+        justifyContent: 'center'
     },
     username: {
         fontSize: 16,
