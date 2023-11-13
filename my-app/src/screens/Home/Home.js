@@ -20,7 +20,7 @@ class Home extends Component {
       foto:"",
       fotito:"",
       nombreDeUsuario:null,
-      comentario:"",
+      comentario: "",
       posteo:[]
     }
   }
@@ -55,16 +55,6 @@ class Home extends Component {
     )
   }
 
-  comentario(){
-    db.collection('posts').update({
-        comentarios:this.state.comentario
-        
-    })
-    .then(console.log('Posteado correctamente'))
-    .catch(e => console.log(`Se ha producido un error : ${e}`))
-}
-
-
      
   logout(){
     auth.signOut();
@@ -72,7 +62,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.state.comentario)
     return (
       <View style={Styles.container}>
          <View style={Styles.header}>
@@ -90,6 +79,13 @@ class Home extends Component {
         source={{
           uri: this.state.fotito}}
       />
+       <TextInput
+                style={Styles.input}
+                onPress={(texto) => this.setState({comentario:texto})}
+                placeholder="Agregar comentario"
+                keyboardType="default"
+                value={this.state.comentario}
+                />
         {
                     this.state.usuarios.length === 0
                     ?
@@ -122,12 +118,6 @@ class Home extends Component {
                        }
                     />
         }
-                <TextInput
-                onChangeText={(text)=>this.setState({comentario:text})}
-                placeholder="Agregar comentario"
-                keyBoardType="default"
-                value={this.state.comentario}
-                />
                  <TouchableOpacity onPress={()=>this.logout()}>
                     <Text> Cerrar sesión</Text>
                 </TouchableOpacity>
@@ -157,6 +147,15 @@ const Styles = StyleSheet.create({
     fontWeight: 'bold',
     marginRight: 10,
   },
+  input: {
+    height: 20, 
+    paddingVertical: 15, 
+    paddingHorizontal:10,
+    borderWidth: 1, 
+    borderColor: "#ccc",
+    borderStyle: 6, 
+    marginVertical: 10, 
+},
   profileImage: {
     width: 50,
     height: 50,
