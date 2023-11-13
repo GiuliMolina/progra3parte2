@@ -8,41 +8,49 @@ class Post extends Component {
         super(props)
         this.state = {
             like: false,
-            cantidadLikes: ''
+            cantidadLikes: '',
+            comentarioTexto: ""
         }
     }
 
     componentDidMount(){
-        if(this.props.dataPost.datos.likes.includes(auth.currentUser.email)){
-            this.setState({
-                like: true
-            })
-        }
+        // if(this.props.dataPost.data.likes.includes(auth.currentUser.email)){
+        //     this.setState({
+        //         like: true
+        //     })
+        // }
 
     }
 
-    likear(){
-        db.collection('post').doc(this.dataPost.id).update({
-            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+    comentar(comentario){
+        db.collection("posts").doc(this.props.dataPost.id).update({
+            comentrarios: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
-        .then(res => this.setState({
-            like: true,
-            cantidadLikes: this.props.dataPost.datos.likes.length
-        }))
+        .then(this.setState({comentarioTexto: comentario}))
+       }
+    
+    // likear(){
+    //     db.collection('posts').doc(this.dataPost.id).update({
+    //         likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+    //     })
+    //     .then(res => this.setState({
+    //         like: true,
+    //         cantidadLikes: this.props.dataPost.data.likes.length
+    //     }))
 
-        .catch(error => console.log(error))
-    }
+    //     .catch(error => console.log(error))
+    // }
 
-    unLike(){
-        db.collection('post').doc(this.props.dataPost.id).update({
-            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-        })
-        .then(res => this.setState({
-            like: false,
-            cantidadLikes: this.props.dataPost.datos.likes.length
-        }))
-        .catch ( error => console.log(error))
-    }
+    // unLike(){
+    //     db.collection('posts').doc(this.props.dataPost.id).update({
+    //         likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+    //     })
+    //     .then(res => this.setState({
+    //         like: false,
+    //         cantidadLikes: this.props.dataPost.data.likes.length
+    //     }))
+    //     .catch ( error => console.log(error))
+    // }
 
     render(){
         console.log(this.props)
@@ -50,7 +58,7 @@ class Post extends Component {
             <View>
                 <Text> Detalles del Post</Text>
                 <Text> Email: </Text>
-                <Text> Texto:</Text>
+                <Text> Texto:{this.props.dataPost.data.textoPost}</Text>
                 <Text> Likes: </Text>
 
                 {

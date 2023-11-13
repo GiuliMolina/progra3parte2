@@ -9,6 +9,7 @@ import {
   Image 
 } from "react-native";
 import { auth,db } from "../../firebase/config";
+import Post from "../../components/Post/Post";
 
 class Home extends Component {
   constructor() {
@@ -20,12 +21,25 @@ class Home extends Component {
       foto:"",
       fotito:"",
       nombreDeUsuario:null,
-      comentario: "",
+      comentario: [],
       posteo:[]
     }
   }
 
-
+  comentar(comentario){
+    db.collection("posts").doc().update(
+      docs =>{
+        let posteosQuieroMostarr = [];
+        docs.forEach(doc=> {
+          posteosQuieroMostarr.push({
+          id: doc.id,
+			    data: doc.data()
+          })
+        })
+        this.setState({posteo: posteosQuieroMostarr})
+      }
+    )
+  }
   componentDidMount(){
     db.collection('users').where("owner","==",this.state.usuario).onSnapshot(
       docs =>{
@@ -94,12 +108,10 @@ class Home extends Component {
                     <FlatList 
                         data= {this.state.usuarios}
                         keyExtractor={ pepe => pepe.id }
-                        renderItem={ ({item}) => {this.setState({foto: item.data.urlImagen,
-                          nombreDeUsuario: item.data.userName}
-                          )}
+                        renderItem={ ({item}) => <Post dataPost={item}></Post>}
                      
                         
-                       }
+                       
                     />
         }
           {
