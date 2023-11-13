@@ -9,7 +9,7 @@ import {
     FlatList,
     Image
 } from "react-native";
-import OtherProfile from "../../components/OtherProfile/OtherProfile";
+
 
 class Buscador extends Component {
     constructor() {
@@ -57,27 +57,9 @@ class Buscador extends Component {
     }
 
     usuarioSeleccionado(userId){
-        this.setState({
-            userId: userId,
-
-        })
+        this.props.navigation.navigate("ProfileUsers", userId)
     }
 
-    buscarUsuarioSeleccionado(){
-        db.collection('users').where("id","==",this.state.userId).onSnapshot(
-            docs =>{
-              let ahoraUsuario = [];
-              docs.forEach(doc=> {
-                ahoraUsuario.push({
-                id: doc.id,
-                      data: doc.data()
-                })
-              })
-              this.setState({usuarios: ahoraUsuario})
-      
-            }
-          )
-    }
 
     render() {
         return (
@@ -99,7 +81,7 @@ class Buscador extends Component {
                             data={this.state.filtrado}
                             keyExtractor={unUsuario => unUsuario.id}
                             renderItem={({ item }) => 
-                                 <TouchableOpacity style={styles.button} onPress={() => this.usuarioSeleccionado(item.id)}>
+                                 <TouchableOpacity style={styles.button} onPress={() => this.usuarioSeleccionado(item.data.owner)}>
                                     <Text>{item.data.userName}</Text>
                                     {console.log(item.data.userName)}
                                 </TouchableOpacity>
