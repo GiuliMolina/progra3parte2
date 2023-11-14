@@ -46,7 +46,10 @@ componentDidMount(){
             fotoDePerfil: fotoPerfil,
             owner: auth.currentUser.email,
             textPost: this.state.textPost,
-            comentarios:{},
+            comentarios:{
+                usuario:"",
+                comentario:""
+            },
             urlPost: this.state.urlPost,
             createdAt: Date.now()
         })
