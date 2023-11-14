@@ -71,20 +71,24 @@ class Post extends Component {
         return (
                 <View style={styles.container}>
                 <View style={styles.header}>
-                {/*  <Image
+                  <Image
                     style = {styles.profileImage}
                     source={{
-                    uri:"pepe"}}
-                    /> */}
+                    uri:this.props.dataPost.data.fotoDePerfil}}
+                    /> 
                     <TouchableOpacity onPress={()=>this.props.navigation.navigate("MiPerfil")}>
-                       <Text style={styles.username}>{this.props.dataPost.data.owner}</Text>
+                       <Text style={styles.username}>{this.props.dataPost.data.userName}</Text>
                     </TouchableOpacity>
                 </View> 
                 <Image
                    style = {styles.postImage}
                    source={{
-                   uri: this.props.dataPost.data.textPost}}
+                   uri: this.props.dataPost.data.urlPost}}
                 />
+                <View styles={styles.comentario}>
+                    <Text style={styles.username}>{this.props.dataPost.data.userName}:</Text>
+                    <Text>{this.props.dataPost.data.textPost}</Text>
+                </View>
 
                 {
                     this.state.like ?
@@ -178,6 +182,10 @@ const styles = StyleSheet.create({
 },
 textButton: {
     color: 'white'
+},
+comentario:{
+    flexDirection: 'row',
+  alignItems: 'center',
 }
 
 })

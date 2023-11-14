@@ -15,14 +15,35 @@ class FormPostear extends Component {
         this.state ={
             textPost: "",
             urlPost: '',
+            usuario: auth.currentUser.email,
+            usuarios:[]
         } 
         console.log(this.state.textPost)       
     }
 
 
+componentDidMount(){
+    db.collection('users').where("owner","==",this.state.usuario).onSnapshot(
+      docs =>{
+        let ahoraUsuario = [];
+        docs.forEach(doc=> {
+          ahoraUsuario.push({
+          id: doc.id,
+			    data: doc.data()
+          })
+          this.setState({usuarios: ahoraUsuario})
+        })
+      }
+    )}
+
 
     posteo(){
+        const userName = this.state.usuarios.length > 0 ? this.state.usuarios[0].data.userName : ''
+        const fotoPerfil = this.state.usuarios.length > 0 ? this.state.usuarios[0].data.urlImagen : '';
+
         db.collection('posts').add({
+            userName: userName,
+            fotoDePerfil: fotoPerfil,
             owner: auth.currentUser.email,
             textPost: this.state.textPost,
             comentarios:{},
@@ -34,6 +55,7 @@ class FormPostear extends Component {
     }
 
     render(){
+        console.log(this.state.usuarios)
         return(
             <View style = {styles.container}>
                 <Text> Posteo </Text>
