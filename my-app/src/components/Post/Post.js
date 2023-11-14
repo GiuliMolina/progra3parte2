@@ -11,7 +11,7 @@ class Post extends Component {
             cantidadLikes: '',
             comentarioTexto: "",
             comentarios: [],
-            usuarioLogueado:auth.currentUser.email,
+            usuarioLogueado: auth.currentUser.email,
             todosUsuarios:[]
         }
     }
@@ -19,14 +19,14 @@ class Post extends Component {
     componentDidMount() {
         db.collection('users').onSnapshot(
             docs =>{
-              let papa = [];
+              let users = [];
               docs.forEach(doc=> {
-                papa.push({
+                users.push({
                 id: doc.id,
                 data: doc.data()
                 })
               })
-              this.setState({todosUsuarios: papa})
+              this.setState({todosUsuarios: users})
       
             }
           )
@@ -38,84 +38,84 @@ class Post extends Component {
 
     comentar(comentario) {
         db.collection("posts").doc(this.props.dataPost.id).update({
-            comentrarios: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+            comentarios: firebase.firestore.FieldValue.arrayUnion(this.state.usuarioLogueado)
         })
             .then(this.setState({ comentarioTexto: comentario }))
     }
 
-    // likear(){
-    //     db.collection('posts').doc(this.dataPost.id).update({
-    //         likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
-    //     })
-    //     .then(res => this.setState({
-    //         like: true,
-    //         cantidadLikes: this.props.dataPost.data.likes.length
-    //     }))
+    like(){
+        db.collection('posts').doc(this.props.dataPost.id).update({
+            likes: firebase.firestore.FieldValue.arrayUnion(this.state.usuarioLogueado)
+        })
+        .then(res => this.setState({
+            like: true,
+            cantidadLikes: this.props.dataPost.data.likes.length
+        }))
 
-    //     .catch(error => console.log(error))
-    // }
+        .catch(error => console.log(error))
+    }
 
-    // unLike(){
-    //     db.collection('posts').doc(this.props.dataPost.id).update({
-    //         likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-    //     })
-    //     .then(res => this.setState({
-    //         like: false,
-    //         cantidadLikes: this.props.dataPost.data.likes.length
-    //     }))
-    //     .catch ( error => console.log(error))
-    // }
+    unLike(){
+        db.collection('posts').doc(this.props.dataPost.id).update({
+            likes: firebase.firestore.FieldValue.arrayRemove(this.state.usuarioLogueado)
+        })
+        .then(res => this.setState({
+            like: false,
+            cantidadLikes: this.props.dataPost.data.likes.length
+        }))
+        .catch ( error => console.log(error))
+    }
 
     render() {
 
         return (
-                  <View style={Styles.container}>
-         <View style={Styles.header}>
-           {/*  <Image
-            style = {Styles.profileImage}
-            source={{
-              uri:"pepe"}}
-            /> */}
-            <TouchableOpacity onPress={()=>this.props.navigation.navigate("MiPerfil")}>
-              <Text style={Styles.username}>{this.props.dataPost.data.owner}</Text>
-            </TouchableOpacity>
-          </View> 
-       <Image
-        style = {Styles.postImage}
-        source={{
-          uri: this.props.dataPost.data.textPost}}
-        />
+                <View style={styles.container}>
+                <View style={styles.header}>
+                {/*  <Image
+                    style = {styles.profileImage}
+                    source={{
+                    uri:"pepe"}}
+                    /> */}
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("MiPerfil")}>
+                       <Text style={styles.username}>{this.props.dataPost.data.owner}</Text>
+                    </TouchableOpacity>
+                </View> 
+                <Image
+                   style = {styles.postImage}
+                   source={{
+                   uri: this.props.dataPost.data.textPost}}
+                />
 
-            {/*     {
+                {
                     this.state.like ?
                         <TouchableOpacity
 
-                            style={StyleSheet.button}
+                            style={styles.button}
                             onPress={() => this.unLike()}>
-                            <Text style={StyleSheet.textButton}> unLike</Text>
+                            <Text style={styles.textButton}> Like</Text>
 
                         </TouchableOpacity>
                         :
 
                         <TouchableOpacity
 
-                            style={StyleSheet.button}
-                            onPress={() => this.unLike()}>
+                            style={styles.button}
+                            onPress={() => this.like()}>
 
-                            <Text style={StyleSheet.textButton}> Like</Text>
+                            <Text style={styles.textButton}> unLike</Text>
 
                         </TouchableOpacity>
 
-                } */}
+                }
 
                 <TextInput
-                    style={Styles.input}
+                    style={styles.input}
                     onPress={(texto) => this.setState({ comentarioTexto: texto })}
                     placeholder="Agregar comentario"
                     keyboardType="default"
                     value={this.state.comentarioTexto}
                 />
-                <TouchableOpacity style={Styles.button} onPress={() => this.comentar(this.state.comentarioTexto)}>
+                <TouchableOpacity style={styles.button} onPress={() => this.comentar(this.state.comentarioTexto)}>
                     <Text> Agregar comentario</Text>
                 </TouchableOpacity>
             </View>
@@ -123,7 +123,7 @@ class Post extends Component {
     }
 }
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
     backgroundColor: 'white',
     borderRadius: 8,
@@ -165,7 +165,20 @@ const Styles = StyleSheet.create({
   postImage: {
     width: '100%', 
     height: 200,
-  }
+  },
+  button: {
+    backgroundColor: "purple",
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    textAlign: "center",
+    borderRadius: 4,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#28a745",
+},
+textButton: {
+    color: 'white'
+}
 
 })
 

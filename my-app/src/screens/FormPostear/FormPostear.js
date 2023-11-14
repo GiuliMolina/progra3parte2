@@ -13,7 +13,7 @@ class FormPostear extends Component {
     constructor(props){
         super();
         this.state ={
-            textPost: ""
+            textPost: "",
         } 
         console.log(this.state.textPost)       
     }
@@ -62,10 +62,17 @@ const styles = StyleSheet.create ({
         paddingVertical: 10,
     },
     button: {
-        backgroundColor: 'purple'
+        backgroundColor: "purple",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "#28a745",
     },
     textButton: {
-        color: 'purple'
+        color: 'white',
     }
 })
 

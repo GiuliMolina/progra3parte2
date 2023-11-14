@@ -53,6 +53,10 @@ class MiPerfil extends Component {
         this.props.navigation.navigate('Login');
     }
 
+    deletedPost(){
+        db.collection('posts').doc().delete()
+    }
+
     // cambiarPass() {
     //    auth
     //    .updatePassword(user, newPassword)
@@ -68,7 +72,7 @@ class MiPerfil extends Component {
 
     render() {
        console.log(this.state.data)
-       
+       console.log(this.state.posteos)
        console.log(this.state.usuarioLogueado)
         
         return (
@@ -83,15 +87,17 @@ class MiPerfil extends Component {
                            <Image style={styles.profileImage} source={{ uri: item.data.urlImage }} />
                            <Text>{this.state.usuarioLogueado} </Text>
                            <Text>{item.data.miniBio} </Text>
+                           <Text> Cantidad de posteos: </Text>
                         </View>
                     )}
                 />
+                <Text>Mis posteos</Text>
                 <FlatList
-                data={this.state.posteos}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
+                    data={this.state.posteos}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
                     <View>
-                        <Text>Mis posteos</Text>
+                        
                        
                     </View>
                 )}
@@ -164,7 +170,7 @@ const styles = StyleSheet.create({
         marginVertical: 10, 
     },
     button: {
-        backgroundColor: "blue",
+        backgroundColor: "purple",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",

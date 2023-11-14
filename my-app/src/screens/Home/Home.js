@@ -72,15 +72,15 @@ class Home extends Component {
                     ?
                     <Text> Cargando... </Text>
                     :
-                    // <FlatList 
-                    //     data= {this.state.usuarios}
-                    //     keyExtractor={ pepe => pepe.id }
-                    //     renderItem={ ({item}) =>  {this.setState({foto: item.data.urlImagen,
-                    //       nombreDeUsuario: item.data.userName})}}
+                    <FlatList 
+                        data= {this.state.usuarios}
+                        keyExtractor={ pepe => pepe.id }
+                        renderItem={ ({item}) =>  {this.setState({foto: item.data.urlImagen,
+                          nombreDeUsuario: item.data.userName})}}
                      
                         
-                    // />
-                    <Text> Hola </Text>
+                    />
+                    
           }
 
           {
