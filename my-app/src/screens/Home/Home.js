@@ -67,21 +67,6 @@ class Home extends Component {
 
     return (
       <View style={Styles.container}>
-         {
-                    this.state.usuarios.length === 0
-                    ?
-                    <Text> Cargando... </Text>
-                    :
-                    <FlatList 
-                        data= {this.state.usuarios}
-                        keyExtractor={ pepe => pepe.id }
-                        renderItem={ ({item}) =>  {this.setState({foto: item.data.urlImagen,
-                          nombreDeUsuario: item.data.userName})}}
-                     
-                        
-                    />
-                    
-          }
 
           {
                     this.state.listaDePosteos.length === 0
