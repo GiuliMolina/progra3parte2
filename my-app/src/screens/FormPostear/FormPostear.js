@@ -14,6 +14,7 @@ class FormPostear extends Component {
         super();
         this.state ={
             textPost: "",
+            urlPost: '',
         } 
         console.log(this.state.textPost)       
     }
@@ -25,6 +26,7 @@ class FormPostear extends Component {
             owner: auth.currentUser.email,
             textPost: this.state.textPost,
             comentarios:{},
+            urlPost: this.state.urlPost,
             createdAt: Date.now()
         })
         .then(console.log('Posteado correctamente'))
@@ -38,10 +40,17 @@ class FormPostear extends Component {
                 <TextInput
                   style= {styles.input}
                   onChangeText ={(texto) => this.setState({ textPost: texto})}
-                  placeholder = 'postea'
+                  placeholder = 'Ingresa un comentario'
                   keyboardType = 'default'
                   value = {this.state.textPost}
                   />
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={(texto)=>this.setState({urlPost: texto})}
+                    placeholder = 'post'
+                    keyBoardType='default'
+                    value = {this.state.urlPost}
+                />
                 <TouchableOpacity
                   style={ styles.button} onPress= {() => this.posteo(auth.currentUser.email, this.state.textPost, Date.now())}>
                     <Text style = {styles.textButton}> Postear </Text>

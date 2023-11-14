@@ -34,7 +34,7 @@ class MiPerfil extends Component {
 
         )
 
-        db.collection("posts").where("owner", "==", auth.currentUser.email).onSnapshot(
+        db.collection("posts").where("owner", "==", this.state.usuarioLogueado).onSnapshot(
             docs =>{
               let posteosQuieroMostrar = [];
               docs.forEach(doc=> {
@@ -53,9 +53,9 @@ class MiPerfil extends Component {
         this.props.navigation.navigate('Login');
     }
 
-    deletedPost(){
-        db.collection('posts').doc().delete()
-    }
+    // deletePost(){
+    //     db.collection('posts').doc().delete()
+    // }
 
     // cambiarPass() {
     //    auth
@@ -91,17 +91,19 @@ class MiPerfil extends Component {
                         </View>
                     )}
                 />
-                <Text>Mis posteos</Text>
+                <Text> Mis posteos</Text>
                 <FlatList
                     data={this.state.posteos}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                    <View>
-                        
-                       
-                    </View>
-                )}
-            />
+                        <View >
+                           <Text>{item.data.textPost}</Text>
+                           <Image source={{ uri: item.data.urlPost }} />
+           
+                        </View>
+                    )}
+                />
+
             {/* <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({nuevaPassword:text})}
