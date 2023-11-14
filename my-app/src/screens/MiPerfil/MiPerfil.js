@@ -9,18 +9,16 @@ class MiPerfil extends Component {
     constructor() {
         super();
         this.state = {
-            foto: "",
             data: [],
             nuevaPassword:"",
             nombreDeUsuario: "",
             usuarioLogueado: auth.currentUser.email,
-            owners: [],
+            posteos: [] 
         }
-        console.log(owner)
     }
 
     componentDidMount() {
-        db.collection('users').onSnapshot(
+        db.collection('users').where("owner", "==", this.state.usuarioLogueado).onSnapshot(
             docs => {
                 let user = [];
                 docs.forEach(doc => {
@@ -36,7 +34,7 @@ class MiPerfil extends Component {
 
         )
 
-        db.collection("posts").where("owner", "==",auth.currentUser.email).onSnapshot(
+        db.collection("posts").where("owner", "==", auth.currentUser.email).onSnapshot(
             docs =>{
               let posteosQuieroMostrar = [];
               docs.forEach(doc=> {
@@ -45,7 +43,7 @@ class MiPerfil extends Component {
                     data: doc.data()
                 })
               })
-              this.setState({posteo: posteosQuieroMostrar})
+              this.setState({posteos: posteosQuieroMostrar})
             }
           )
     }
@@ -69,45 +67,56 @@ class MiPerfil extends Component {
     // }
 
     render() {
-        console.log(this.state.data)
-        console.log(this.state.usuarioLogueado)
+       console.log(this.state.data)
+       
+       console.log(this.state.usuarioLogueado)
         
         return (
-            <View>
-                <Text></Text>
-            {
-                this.state.data ==! this.state.usuarioLogueado
-                ?
-                <Text> Cargando...</Text>
-                
-                :
+            <View style = {styles.conteiner}>
 
-                <View> 
-                
-                <Text> {this.state.data.userName}</Text>
-                <Text> {this.state.usuarioLogueado}</Text>
-                {/* <Image style = {Styles.profileImage}
-                    src={{uri: this.state.data.urlImage}}
-                /> */}
-                </View>
-                
+                <FlatList
+                    data={this.state.data}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <View>
+                           <Text>{item.data.userName}</Text>
+                           <Image style={styles.profileImage} source={{ uri: item.data.urlImage }} />
+                           <Text>{this.state.usuarioLogueado} </Text>
+                           <Text>{item.data.miniBio} </Text>
+                        </View>
+                    )}
+                />
+                <FlatList
+                data={this.state.posteos}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                    <View>
+                        <Text>Mis posteos</Text>
+                       
+                    </View>
+                )}
+            />
+            {/* <TextInput
+                    style={styles.input}
+                    onChangeText={(text)=>this.setState({nuevaPassword:text})}
+                    placeholder = "password"
+                    keyBoardType="default"
+                    value = {this.state.nuevaPassword}
+                />  */}
 
+                {/* <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => this.cambiarPass()}
+                ></TouchableOpacity> */}
+
+
+
+                <TouchableOpacity style= {styles.button} onPress={() => this.logout()}>
+                    <Text> Cerrar sesión</Text>
+                </TouchableOpacity>
                 
-                
-                // <FlatList 
-                // data= {this.state.data}
-                // keyExtractor={ user => user.id }
-                // renderItem={ ({item}) => {this.setState({
-                //     owners: item.data.owner})}
-                // }
-                // />
-
-            }
-
-            
-
             </View>
-            
+
         )
     }
 }
