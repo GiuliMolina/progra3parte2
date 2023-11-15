@@ -5,7 +5,8 @@ import {
     TouchableOpacity,
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    ActivityIndicator
 } from "react-native";
 
 class Login extends Component {
@@ -22,6 +23,8 @@ class Login extends Component {
         auth.onAuthStateChanged((user) => {
             if (user) {
                 this.props.navigation.navigate("Menu")
+            } else {
+                <ActivityIndicator size="large" color="purple"/>
             }
         });
     }
