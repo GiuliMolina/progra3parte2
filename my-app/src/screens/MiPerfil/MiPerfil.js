@@ -182,6 +182,9 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderColor: "#28a745",
     },
+    textButton: {
+        color: 'white'
+    },
 })
 
 export default MiPerfil;
