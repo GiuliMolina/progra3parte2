@@ -94,8 +94,7 @@ class Post extends Component {
                    uri: this.props.dataPost.data.urlPost}}
                 />
                 <View styles={styles.comentario}>
-                    <Text style={styles.username}>{this.props.dataPost.data.userName}:</Text>
-                    <Text>{this.props.dataPost.data.textPost}</Text>
+                    <Text><Text style={styles.username}>{this.props.dataPost.data.userName}</Text>:{this.props.dataPost.data.textPost}</Text>
                 </View>
 
                 {
@@ -130,6 +129,7 @@ class Post extends Component {
                 <TouchableOpacity style={styles.button} onPress={() => this.comentar(this.state.comentarioTexto)}>
                     <Text> Agregar comentario</Text>
                 </TouchableOpacity>
+                <Text>Cantidad de comentarios: {this.props.dataPost.data.comentarios.length}</Text>
                 <TouchableOpacity onPress={() => this.setState({ mostrarComentarios: !this.state.mostrarComentarios })}>
                     <Text>
                     {this.state.mostrarComentarios ? 'Ocultar Comentarios' : 'Mostrar Comentarios'}
@@ -141,8 +141,9 @@ class Post extends Component {
                     keyExtractor={(pepe) => pepe.id}
                     renderItem={({item}) => (
                 <TouchableOpacity>
-                    <Text style={styles.username}>{item.usuario}</Text>
-                    <Text>{item.comentario}</Text>
+                  <View styles={styles.comentario}>
+                    <Text><Text style={styles.username}>{item.usuario}</Text>: {item.comentario}</Text>
+                    </View>
                 </TouchableOpacity>
                      )}
                 />
