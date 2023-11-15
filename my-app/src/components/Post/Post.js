@@ -130,6 +130,7 @@ class Post extends Component {
                     <Text> Agregar comentario</Text>
                 </TouchableOpacity>
                 <Text>Cantidad de comentarios: {this.props.dataPost.data.comentarios.length}</Text>
+                <Text>Cantidad de likes: {this.props.dataPost.data.likes.length}</Text>
                 <TouchableOpacity onPress={() => this.setState({ mostrarComentarios: !this.state.mostrarComentarios })}>
                     <Text>
                     {this.state.mostrarComentarios ? 'Ocultar Comentarios' : 'Mostrar Comentarios'}
