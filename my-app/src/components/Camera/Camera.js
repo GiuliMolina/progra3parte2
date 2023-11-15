@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Camera} from 'expo-camera';
-import {Text} from 'react-native';
+import {Text, Touchable, TouchableOpacity} from 'react-native';
 import {Storage} from '../firebase/config';
 
 class Camera extends Component{
@@ -25,13 +25,47 @@ class Camera extends Component{
         .catch(error => console.log(error))
     }
 
+    takePhoto(){
+        this.metodosCamera.takePictureAsync()
+        .then(photo => {
+            this.setState({
+                photo: photo.uri,
+                showCamera: false
+            })
+        })
+        .catch(e => console.log(e))
+    }
+
+
+
 
     render(){
 
-        return(
-            <Text>
+        console.log(this.state.photo)
 
-            </Text>
+        return(
+            <>
+
+            {/* {this.state.permisos ?
+            this.state.showCamera ?
+
+            <View>
+                <Camera type= {Camera.Constants.Type.front}
+                ref ={metodosCamera => this.metodosCamera = metodosCamera}/>
+
+                <TouchableOpacity 
+                onPress={() => this.takePhoto}>
+                    <Text>Take photo </Text>
+                </TouchableOpacity>
+            </View>
+
+            :
+            <View>
+                <Text> Not permisos</Text>
+            </View>
+        
+            } */}
+            </>
         )
     }
 }
