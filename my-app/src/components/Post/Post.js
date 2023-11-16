@@ -143,12 +143,12 @@ class Post extends Component {
 
         <TouchableOpacity onPress={() => this.setState({ mostrarComentarios: !this.state.mostrarComentarios })}>
           <Text>
-            {this.state.mostrarComentarios ? 'Ocultar Comentarios' : 'Mostrar Comentarios'}
+            {this.state.mostrarComentarios ? 'Ocultar Comentarios' : 'Mostrar Comentarios ultimos 4 comentarios'}
           </Text>
         </TouchableOpacity>
-        {this.state.mostrarComentarios === true ?
+        {this.state.mostrarComentarios === true && this.props.dataPost.data.comentarios.length > 0 ?
           <FlatList
-            data={this.props.dataPost.data.comentarios}
+            data={this.props.dataPost.data.comentarios.slice(-4)}
             keyExtractor={(pepe) => pepe.id}
             renderItem={({ item }) => (
               <TouchableOpacity>
@@ -159,7 +159,7 @@ class Post extends Component {
             )}
           />
           :
-          <Text></Text>
+          <Text>No hay comentarios</Text>
         }
 
 
