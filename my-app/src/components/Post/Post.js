@@ -7,7 +7,7 @@ class Post extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            like: false,
+            like: true,
             cantidadLikes: '',
             comentarioTexto: "",
             comentarios: [],
@@ -57,7 +57,7 @@ class Post extends Component {
             likes: firebase.firestore.FieldValue.arrayUnion(this.state.usuarioLogueado)
         })
         .then(res => this.setState({
-            like: true,
+            like: false,
             cantidadLikes: this.props.dataPost.data.likes.length
         }))
 
@@ -69,7 +69,7 @@ class Post extends Component {
             likes: firebase.firestore.FieldValue.arrayRemove(this.state.usuarioLogueado)
         })
         .then(res => this.setState({
-            like: false,
+            like: true,
             cantidadLikes: this.props.dataPost.data.likes.length
         }))
         .catch ( error => console.log(error))
@@ -89,9 +89,9 @@ class Post extends Component {
                     </TouchableOpacity>
                 </View> 
                 <Image
-                   style = {styles.postImage}
-                   source={{
-                   uri: this.props.dataPost.data.urlPost}}
+                  style = {styles.postImage}
+                  source={{
+                  uri: this.props.dataPost.data.urlPost}}
                 />
                 <View styles={styles.comentario}>
                     <Text style={styles.username}>{this.props.dataPost.data.userName}:</Text>
@@ -103,7 +103,7 @@ class Post extends Component {
                         <TouchableOpacity
 
                             style={styles.button}
-                            onPress={() => this.unLike()}>
+                            onPress={() => this.like()}>
                             <Text style={styles.textButton}> Like</Text>
 
                         </TouchableOpacity>
@@ -112,7 +112,7 @@ class Post extends Component {
                         <TouchableOpacity
 
                             style={styles.button}
-                            onPress={() => this.like()}>
+                            onPress={() => this.unLike()}>
 
                             <Text style={styles.textButton}> unLike</Text>
 

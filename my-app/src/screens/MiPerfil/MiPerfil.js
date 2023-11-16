@@ -78,12 +78,14 @@ class MiPerfil extends Component {
         
         return (
             <View style = {styles.conteiner}>
+                 
 
                 <FlatList
+                  
                     data={this.state.data}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <View>
+                        <View style={styles.info}>
                            <Text>{item.data.userName}</Text>
                            <Image style={styles.profileImage} source={{ uri: item.data.urlImage }} />
                            <Text>{this.state.usuarioLogueado} </Text>
@@ -97,10 +99,8 @@ class MiPerfil extends Component {
                     data={this.state.posteos}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <View >
-                           <Text>{item.data.textPost}</Text>
+                        <View style={styles.conteiner}>
                            <Post dataPost={item} navigation={this.props.navigation}/>
-           
                         </View>
                     )}
                 />
@@ -136,6 +136,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center'
     },
+    view: {
+        flex: 1
+
+    },
+    info: {
+        justifyContent: 'center'
+
+    },
     username: {
         fontSize: 16,
         fontWeight: 'bold',
@@ -156,7 +164,7 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         borderWidth: 2,
         borderColor: '#fff',
-        marginRight: 10, 
+        marginRight: 10,
     },
     postImage: {
         width: '100%', 
