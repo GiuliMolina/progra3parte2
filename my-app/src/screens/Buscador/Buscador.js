@@ -20,9 +20,9 @@ class Buscador extends Component {
             filtrado: [],
             userId: "",
             infoUsuario: null,
-            usuarios: [],
+            usuarios: []
 
-        }  
+        }
     }
 
 
@@ -44,19 +44,22 @@ class Buscador extends Component {
 
     busqueda() {
         let filtradoUsuarios = this.state.backup.filter(elm => {
-            if(elm.data.owner.toLowerCase().includes(this.state.campoBusqueda.toLowerCase())) {
+            if (elm.data.owner.toLowerCase().includes(this.state.campoBusqueda.toLowerCase())) {
                 return elm
+            } else if(elm.data.userName.toLowerCase().includes(this.state.campoBusqueda.toLowerCase())) {
+                return elm 
+
             }
         })
-        this.setState({ filtrado: filtradoUsuarios }, () => console.log(this.state.filtrado))
+        this.setState({ filtrado: filtradoUsuarios })
     }
 
-    usuarioSeleccionado(userId){
+    usuarioSeleccionado(userId) {
         this.props.navigation.navigate("ProfileUsers", userId)
     }
 
-
     render() {
+        console.log(this.state.filtrado.length)
         return (
             <View>
                 <TextInput
@@ -69,42 +72,29 @@ class Buscador extends Component {
                 <TouchableOpacity style={styles.button} onPress={() => this.busqueda()}>
                     <Text>Buscar</Text>
                 </TouchableOpacity>
-                <Text> Resultados de busqueda para: {this.state.campoBusqueda}</Text>
+                {
+                    this.state.campoBusqueda == "" ?
+                        <Text> No hay busquedas todavia </Text> :
+                        <Text> Resultados de busqueda para: {this.state.campoBusqueda}</Text>
+                }
+
                 {
                     this.state.filtrado.length > 0 ?
                         <FlatList
                             data={this.state.filtrado}
                             keyExtractor={unUsuario => unUsuario.id}
-                            renderItem={({ item }) => 
-                                 <TouchableOpacity style={styles.button} onPress={() => this.usuarioSeleccionado(item.data.owner)}>
+                            renderItem={({ item }) =>
+                                <TouchableOpacity style={styles.button} onPress={() => this.usuarioSeleccionado(item.data.owner)}>
                                     <Text>{item.data.userName}</Text>
-                                    {console.log(item.data.userName)}
                                 </TouchableOpacity>
-
                             }
                         />
-                        :
-
-                        <Text> Cargando... </Text>
-
+                        : <Text> No exise el email/usuario que busca</Text>
                 }
-            
-
-                <TouchableOpacity onPress={() => this.logout()}>
-                    <Text> Cerrar sesión</Text>
-                </TouchableOpacity>
-
-                {/* { this.state.userId !== "" ? 
-                <FlatList 
-                data= {this.state.usuarios}
-                keyExtractor={ pepe => pepe.id }
-                renderItem={ ({item}) =>  <OtherProfile dataUsuario={item}> </OtherProfile>}
-             
                 
-            />
-                     : false */}
+        
 
-                
+
             </View>
 
         )

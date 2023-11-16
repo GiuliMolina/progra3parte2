@@ -1,43 +1,45 @@
-import React, {Component} from 'react';
-import {View, 
-    Text, 
-    StyleSheet, 
-    TextInput, 
+import React, { Component } from 'react';
+import {
+    View,
+    Text,
+    StyleSheet,
+    TextInput,
     TouchableOpacity
 } from 'react-native';
-import {auth, db} from "../../firebase/config";
+import { auth, db } from "../../firebase/config";
 
 
 class FormPostear extends Component {
 
-    constructor(props){
+    constructor(props) {
         super();
-        this.state ={
+        this.state = {
             textPost: "",
             urlPost: '',
             usuario: auth.currentUser.email,
-            usuarios:[]
-        } 
-        console.log(this.state.textPost)       
+            usuarios: []
+        }
+        console.log(this.state.textPost)
     }
 
 
-componentDidMount(){
-    db.collection('users').where("owner","==",this.state.usuario).onSnapshot(
-      docs =>{
-        let ahoraUsuario = [];
-        docs.forEach(doc=> {
-          ahoraUsuario.push({
-          id: doc.id,
-			    data: doc.data()
-          })
-          this.setState({usuarios: ahoraUsuario})
-        })
-      }
-    )}
+    componentDidMount() {
+        db.collection('users').where("owner", "==", this.state.usuario).onSnapshot(
+            docs => {
+                let ahoraUsuario = [];
+                docs.forEach(doc => {
+                    ahoraUsuario.push({
+                        id: doc.id,
+                        data: doc.data()
+                    })
+                    this.setState({ usuarios: ahoraUsuario })
+                })
+            }
+        )
+    }
 
 
-    posteo(){
+    posteo() {
         const userName = this.state.usuarios.length > 0 ? this.state.usuarios[0].data.userName : ''
         const fotoPerfil = this.state.usuarios.length > 0 ? this.state.usuarios[0].data.urlImagen : '';
 
@@ -46,39 +48,44 @@ componentDidMount(){
             fotoDePerfil: fotoPerfil,
             owner: auth.currentUser.email,
             textPost: this.state.textPost,
-            comentarios:{
-                usuario:"",
-                comentario:""
+            comentarios: {
+                usuario: "",
+                comentario: ""
             },
             urlPost: this.state.urlPost,
             createdAt: Date.now()
         })
-        .then(console.log('Posteado correctamente'))
-        .catch(e => console.log(`Se ha producido un error : ${e}`))
+            .then((response) => {
+                this.setState({
+                    textPost: "",
+                    urlPost: "",
+                })
+            })
+            .catch(e => console.log(`Se ha producido un error : ${e}`))
     }
 
-    render(){
+    render() {
         console.log(this.state.usuarios)
-        return(
-            <View style = {styles.container}>
+        return (
+            <View style={styles.container}>
                 <Text> Posteo </Text>
                 <TextInput
-                  style= {styles.input}
-                  onChangeText ={(texto) => this.setState({ textPost: texto})}
-                  placeholder = 'Ingresa un comentario'
-                  keyboardType = 'default'
-                  value = {this.state.textPost}
-                  />
-                  <TextInput
                     style={styles.input}
-                    onChangeText={(texto)=>this.setState({urlPost: texto})}
-                    placeholder = 'post'
+                    onChangeText={(texto) => this.setState({ textPost: texto })}
+                    placeholder='Ingresa un comentario'
+                    keyboardType='default'
+                    value={this.state.textPost}
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(texto) => this.setState({ urlPost: texto })}
+                    placeholder='post'
                     keyBoardType='default'
-                    value = {this.state.urlPost}
+                    value={this.state.urlPost}
                 />
                 <TouchableOpacity
-                  style={ styles.button} onPress= {() => this.posteo(auth.currentUser.email, this.state.textPost, Date.now())}>
-                    <Text style = {styles.textButton}> Postear </Text>
+                    style={styles.button} onPress={() => this.posteo(auth.currentUser.email, this.state.textPost, Date.now())}>
+                    <Text style={styles.textButton}> Postear </Text>
                 </TouchableOpacity>
 
             </View>
@@ -87,7 +94,7 @@ componentDidMount(){
 
 }
 
-const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
     },

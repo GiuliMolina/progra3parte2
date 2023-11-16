@@ -57,8 +57,8 @@ class ProfileUsers extends Component {
                     keyExtractor={unUsuario => unUsuario.id}
                     renderItem={({ item }) =>
                         <View>
-                            <Text>Email:{item.data.owner}</Text>
                             <Text>Nombre de usuario: {item.data.userName} </Text>
+                            <Text>Email:{item.data.owner}</Text>
                             <Image
                                 style={styles.postImage}
                                 source={{
@@ -68,8 +68,8 @@ class ProfileUsers extends Component {
                     }
                 />
                 {
-                    this.state.listaDePosteos ==0 ?
-                    <Text> Este usuario no tiene nigun posteo</Text> :
+                    this.state.listaDePosteos == 0 ?
+                        <Text> Este usuario no tiene nigun posteo</Text> :
                         <FlatList
                             data={this.state.listaDePosteos}
                             keyExtractor={unPost => unPost.id}
@@ -77,9 +77,15 @@ class ProfileUsers extends Component {
                                 <View>
                                     <Text> {item.data.textPost} </Text>
                                     <Text> {item.data.owner}</Text>
+                                    <Image
+                                        style={styles.profileImage}
+                                        source={{
+                                            uri: item.data.urlPost
+                                        }}
+                                    />
                                 </View>
                             }
-                        />  
+                        />
                 }
 
             </View>

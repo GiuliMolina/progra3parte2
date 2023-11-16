@@ -15,7 +15,8 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            errorMessage: ""
+            errorMessage: "",
+            buscandoSesion: undefined
         };
     }
 
@@ -23,8 +24,13 @@ class Login extends Component {
         auth.onAuthStateChanged((user) => {
             if (user) {
                 this.props.navigation.navigate("Menu")
-            } else {
-                <ActivityIndicator size="large" color="purple"/>
+                this.setState({
+                    buscandoSesion: false
+                })
+            }  else{
+                this.setState({
+                    buscandoSesion: true
+                })
             }
         });
     }
@@ -77,6 +83,10 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.formContainer}>
+            {
+                this.state.cargando == true  ? 
+                <ActivityIndicator size="large" color="purple"/> : 
+                <View>
                 <Text>Login</Text>
                 <TextInput
                     style={styles.input}
@@ -109,6 +119,9 @@ class Login extends Component {
                 <TouchableOpacity onPress={() => this.props.navigation.navigate("Register")}>
                     <Text> No tengo cuenta. Registrate.</Text>
                 </TouchableOpacity>
+            </View>
+            }
+            
 
             </View>
         );
