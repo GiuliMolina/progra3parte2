@@ -22,12 +22,7 @@ class Buscador extends Component {
             infoUsuario: null,
             usuarios: [],
 
-            // todos los usuarios que me trajo firebase con el component did mount
-            // filtrado basado en este array, le das este array a tu flatlist 
-            // a traves de buscador form actualizo el text input, cada vez que actualizo ese estado,
-            // estoy ejecutando el metodo que actualiza el estado y que me filtra
-            // on press, va al perfil de cada uno toucahnle opcaity, onPress this.state.userId: id del elemento que me esta recorriendo la flatlist
-        }   // cuando toca un perfil, se lo pasas por props al user profile el id de ese usuario
+        }  
     }
 
 

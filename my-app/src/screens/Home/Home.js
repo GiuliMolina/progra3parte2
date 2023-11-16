@@ -73,7 +73,7 @@ class Home extends Component {
                     ?
                     <Text>Cargando...</Text>
                     :
-                    <FlatList 
+                    <FlatList style = {Styles.container}
                         data= {this.state.listaDePosteos}
                         keyExtractor={ unPost => unPost.id }
                         renderItem={ ({item}) => <Post dataPost={item} navigation={this.props.navigation}/>
@@ -83,9 +83,6 @@ class Home extends Component {
                        
                     />
         }
-                 <TouchableOpacity onPress={()=>this.logout()}>
-                    <Text> Cerrar sesión</Text>
-                </TouchableOpacity>
       </View>
     );
 }}
@@ -101,6 +98,7 @@ const Styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 5,
+    flex:1
   },
   header: {
     flexDirection: 'row',
