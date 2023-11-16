@@ -7,7 +7,7 @@ class Post extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      like: false,
+      like: true,
       cantidadLikes: '',
       comentarioTexto: "",
       comentarios: [],
@@ -28,10 +28,10 @@ class Post extends Component {
           })
         })
         this.setState({ todosUsuarios: users })
-
       }
     )
   }
+
 
   compararUsuarios(usuario) {
 
@@ -57,7 +57,7 @@ class Post extends Component {
       likes: firebase.firestore.FieldValue.arrayUnion(this.state.usuarioLogueado)
     })
       .then(res => this.setState({
-        like: true,
+        like: false,
         cantidadLikes: this.props.dataPost.data.likes.length
       }))
 
@@ -69,14 +69,14 @@ class Post extends Component {
       likes: firebase.firestore.FieldValue.arrayRemove(this.state.usuarioLogueado)
     })
       .then(res => this.setState({
-        like: false,
+        like: true,
         cantidadLikes: this.props.dataPost.data.likes.length
       }))
       .catch(error => console.log(error))
   }
 
+
   render() {
-    console.log(this.props.dataPost)
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -99,13 +99,12 @@ class Post extends Component {
         <View styles={styles.comentario}>
           <Text><Text style={styles.username}>{this.props.dataPost.data.userName}</Text>:{this.props.dataPost.data.textPost}</Text>
         </View>
-
         {
           this.state.like ?
             <TouchableOpacity
 
               style={styles.button}
-              onPress={() => this.unLike()}>
+              onPress={() => this.like()}>
               <Text style={styles.textButton}> Like</Text>
 
             </TouchableOpacity>
@@ -114,20 +113,17 @@ class Post extends Component {
             <TouchableOpacity
 
               style={styles.button}
-              onPress={() => this.like()}>
+              onPress={() => this.unLike()}>
 
               <Text style={styles.textButton}> unLike</Text>
 
             </TouchableOpacity>
 
         }
-
-{
+        {
           this.props.dataPost.data.likes ?
-            <Text>Cantidad de likes: {this.props.dataPost.data.likes.length}</Text> :
-            <Text> Este posteo no tiene likes</Text>
+            <Text>Cantidad de likes: {this.props.dataPost.data.likes.length}</Text> : false
         }
-
         <TextInput
           style={styles.input}
           onChangeText={(texto) => this.setState({ comentarioTexto: texto })}
@@ -135,18 +131,14 @@ class Post extends Component {
           keyboardType="default"
           value={this.state.comentarioTexto}
         />
-
-        
         <TouchableOpacity style={styles.button} onPress={() => this.comentar(this.state.comentarioTexto)}>
           <Text> Agregar comentario</Text>
         </TouchableOpacity>
-
         {
-          this.props.dataPost.data.comentarios.length > 0 ?
+          this.props.dataPost.data.comentarios ?
             <Text>Cantidad de comentarios: {this.props.dataPost.data.comentarios.length}</Text> :
-            <Text> Este posteo no tiene comentarios</Text>
+            <Text> No hay comentarios en este posteo</Text>
         }
-
 
 
         <TouchableOpacity onPress={() => this.setState({ mostrarComentarios: !this.state.mostrarComentarios })}>
@@ -161,7 +153,7 @@ class Post extends Component {
             renderItem={({ item }) => (
               <TouchableOpacity>
                 <View styles={styles.comentario}>
-                  <Text style={styles.username}>{item.data.comentario.usuario}</Text>: <Text>{item.data.comentario}</Text>
+                  <Text><Text style={styles.username}>{item.usuario}</Text>: {item.comentario}</Text>
                 </View>
               </TouchableOpacity>
             )}
@@ -175,6 +167,7 @@ class Post extends Component {
     )
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
