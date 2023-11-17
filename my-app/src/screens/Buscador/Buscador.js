@@ -46,8 +46,8 @@ class Buscador extends Component {
         let filtradoUsuarios = this.state.backup.filter(elm => {
             if (elm.data.owner.toLowerCase().includes(this.state.campoBusqueda.toLowerCase())) {
                 return elm
-            } else if(elm.data.userName.toLowerCase().includes(this.state.campoBusqueda.toLowerCase())) {
-                return elm 
+            } else if (elm.data.userName.toLowerCase().includes(this.state.campoBusqueda.toLowerCase())) {
+                return elm
 
             }
         })
@@ -61,38 +61,41 @@ class Buscador extends Component {
     render() {
         console.log(this.state.filtrado.length)
         return (
-            <View>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(text) => this.setState({ campoBusqueda: text })}
-                    placeholder="userName"
-                    keyboardType="default"
-                    value={this.state.campoBusqueda}
-                />
-                <TouchableOpacity style={styles.button} onPress={() => this.busqueda()}>
-                    <Text>Buscar</Text>
-                </TouchableOpacity>
-                {
-                    this.state.campoBusqueda == "" ?
-                        <Text> No hay busquedas todavia </Text> :
-                        <Text> Resultados de busqueda para: {this.state.campoBusqueda}</Text>
-                }
+            <View style={styles.formContainer}>
+                <View style={styles.container}>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(text) => this.setState({ campoBusqueda: text })}
+                        placeholder="Nombre de usuario o mail"
+                        keyboardType="default"
+                        value={this.state.campoBusqueda}
+                    />
+                    <TouchableOpacity style={styles.button} onPress={() => this.busqueda()}>
+                        <Text style={styles.textoBoton}>Buscar</Text>
+                    </TouchableOpacity>
+                    {
+                        this.state.campoBusqueda == "" ?
+                            <Text> No hay busquedas todavia </Text> :
+                            <Text> Resultados de busqueda para: {this.state.campoBusqueda}</Text>
+                    }
 
-                {
-                    this.state.filtrado.length > 0 ?
-                        <FlatList
-                            data={this.state.filtrado}
-                            keyExtractor={unUsuario => unUsuario.id}
-                            renderItem={({ item }) =>
-                                <TouchableOpacity style={styles.button} onPress={() => this.usuarioSeleccionado(item.data.owner)}>
-                                    <Text>{item.data.userName}</Text>
-                                </TouchableOpacity>
-                            }
-                        />
-                        : <Text> No exise el email/usuario que busca</Text>
-                }
-                
-        
+                    {
+                        this.state.filtrado.length > 0 ?
+                            <FlatList
+                                data={this.state.filtrado}
+                                keyExtractor={unUsuario => unUsuario.id}
+                                renderItem={({ item }) =>
+                                    <TouchableOpacity style={styles.button} onPress={() => this.usuarioSeleccionado(item.data.owner)}>
+                                        <Text>{item.data.userName}</Text>
+                                    </TouchableOpacity>
+                                }
+                            />
+                            : <Text> No exise el email/usuario que busca</Text>
+                    }
+
+                </View>
+
+
 
 
             </View>
@@ -103,7 +106,6 @@ class Buscador extends Component {
 
 const styles = StyleSheet.create({
     itemUsuario: {
-
         color: "black",
         padding: 20,
         borderColor: "red",
@@ -113,6 +115,20 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         marginTop: 20
     },
+    container: {
+        backgroundColor: 'white',
+        borderRadius: 8,
+        margin: 10,
+        padding: 10,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        elevation: 5,
+        flex:1,
+        alignItems: "flex-start",
+        justifyContent: "center",
+      },
     input: {
         height: 20,
         paddingVertical: 15,
@@ -121,7 +137,8 @@ const styles = StyleSheet.create({
         borderColor: "#ccc",
         borderStyle: "solid",
         borderRadius: 6,
-        marginVertical: 10
+        marginVertical: 10,
+        width: "50%",
     },
     image: {
         width: 50,
@@ -131,15 +148,22 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     button: {
-        backgroundColor: '#28a745',
+        backgroundColor: "rgb(99 71 239)",
         paddingHorizontal: 10,
         paddingVertical: 6,
-        textAlign: 'center',
+        textAlign: "center",
         borderRadius: 4,
         borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderStyle: "solid",
+        borderColor: "purple",
+        width: "20%",
+        flex: 1
     },
+    textoBoton: {
+        textAlign: "center",
+        color: "#fff",
+        width: "100%"
+    }
 })
 
 export default Buscador;

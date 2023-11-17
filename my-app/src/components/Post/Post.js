@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import firebase from 'firebase';
 import { auth, db } from "../../firebase/config";
+import { BiSolidLike } from "react-icons/bi";
+import { BiSolidDislike } from "react-icons/bi";
 
 class Post extends Component {
   constructor(props) {
@@ -105,7 +107,7 @@ class Post extends Component {
 
               style={styles.button}
               onPress={() => this.like()}>
-              <Text style={styles.textButton}> Like</Text>
+              <Text style={styles.textButton}> <BiSolidLike style={styles.iconoLike}/></Text>
 
             </TouchableOpacity>
             :
@@ -115,7 +117,7 @@ class Post extends Component {
               style={styles.button}
               onPress={() => this.unLike()}>
 
-              <Text style={styles.textButton}> unLike</Text>
+              <Text style={styles.textButton}> <BiSolidDislike style={styles.iconoLike}/></Text>
 
             </TouchableOpacity>
 
@@ -199,6 +201,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderStyle: 6,
     marginVertical: 10,
+    width: "40%"
   },
   profileImage: {
     width: 50,
@@ -213,14 +216,14 @@ const styles = StyleSheet.create({
     height: 200,
   },
   button: {
-    backgroundColor: "purple",
     paddingHorizontal: 10,
     paddingVertical: 6,
     textAlign: "center",
     borderRadius: 4,
     borderWidth: 1,
     borderStyle: "solid",
-    borderColor: "#28a745",
+    width: "40%",
+    borderColor: "white"
   },
   textButton: {
     color: 'white'
@@ -228,6 +231,9 @@ const styles = StyleSheet.create({
   comentario: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  iconoLike:{
+    color: "black"
   }
 
 })
