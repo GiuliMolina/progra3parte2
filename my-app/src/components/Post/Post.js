@@ -133,8 +133,8 @@ class Post extends Component {
           keyboardType="default"
           value={this.state.comentarioTexto}
         />
-        <TouchableOpacity style={styles.button} onPress={() => this.comentar(this.state.comentarioTexto)}>
-          <Text> Agregar comentario</Text>
+        <TouchableOpacity style={styles.otroButton} onPress={() => this.comentar(this.state.comentarioTexto)}>
+          <Text>Agregar comentario</Text>
         </TouchableOpacity>
         {
           this.props.dataPost.data.comentarios ?
@@ -225,15 +225,30 @@ const styles = StyleSheet.create({
     width: "40%",
     borderColor: "white"
   },
+  otroButton: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    textAlign: "center",
+    borderRadius: 4,
+    borderWidth: 1,
+    borderStyle: "solid",
+    width: "20%",
+    borderColor: "rgb(99 71 239)",
+    backgroundColor: "rgb(99 71 239)",
+    flex:1,
+    alignItems: "center",
+    marginBottom:"10px"
+  },
   textButton: {
-    color: 'white'
+    color: 'white', 
   },
   comentario: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   iconoLike:{
-    color: "black"
+    color: "black",
+    fontSize: "20px"
   }
 
 })
