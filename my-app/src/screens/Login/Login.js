@@ -86,19 +86,19 @@ class Login extends Component {
             {
                 this.state.cargando == true  ? 
                 <ActivityIndicator size="large" color="purple"/> : 
-                <View>
-                <Text>Login</Text>
+                <View style={styles.container}>
+                <Text style={styles.textoLogin}>Login</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ email: text })}
-                    placeholder="email"
+                    placeholder="Email"
                     keyboardType="email-adress"
                     value={this.state.email}
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ password: text })}
-                    placeholder="password"
+                    placeholder="Contraseña"
                     keyboardType="default"
                     secureTextEntry={true}
                     value={this.state.password}
@@ -107,8 +107,7 @@ class Login extends Component {
                     style={styles.button}
                     onPress={() => this.login(this.state.email, this.state.password)}
                 >
-                    <Text
-                        style={styles.button}
+                    <Text style={styles.textButton}
                     > Ingresar </Text>
                 </TouchableOpacity>
 
@@ -117,7 +116,7 @@ class Login extends Component {
                     : false
                 }
                 <TouchableOpacity onPress={() => this.props.navigation.navigate("Register")}>
-                    <Text> No tengo cuenta. Registrate.</Text>
+                    <Text style={styles.texto3}>No tengo cuenta.  <Text style={styles.texto2}>Registrate</Text></Text>
                 </TouchableOpacity>
             </View>
             }
@@ -131,8 +130,27 @@ class Login extends Component {
 const styles = StyleSheet.create({
     formContainer: {
         paddingHorizontal: 10,
-        marginTop: 20
+        marginTop: 20,
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1
     },
+    container: {
+        backgroundColor: 'white',
+        borderRadius: 8,
+        margin: 10,
+        padding: 10,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        elevation: 5,
+        flex:1,
+        alignItems: "center",
+        justifyContent: "center",
+        maxHeight: "60%",
+        width: "40%"
+      },
     input: {
         height: 20,
         paddingVertical: 15,
@@ -141,23 +159,37 @@ const styles = StyleSheet.create({
         borderColor: "#ccc",
         borderStyle: "solid",
         borderRadius: 6,
-        marginVertical: 10
+        marginVertical: 10,
+        height: "10%",
+        width: "90%"
     },
     button: {
-        backgroundColor: "blue",
+        backgroundColor: "rgb(99 71 239)",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: "solid",
-        borderColor: "#28a745",
+        borderColor: "purple",
+        marginTop: "30px"
     },
     textButton: {
         color: "#fff"
     },
     textoLogin: {
-        color: "red",
+        fontSize: "25px",
+        marginBottom: "30px",
+    },
+    texto2:{
+        marginTop: "20px",
+        color: "blue",
+        textDecorationColor:"blue",
+        textDecorationLine: "underline"
+    },
+    texto3:{
+        marginTop: "20px",
+        
     }
 
 });

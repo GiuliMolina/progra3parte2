@@ -71,18 +71,19 @@ class Register extends Component {
     render(){
         return(
             <View style={styles.formContainer}>
-                <Text>Register</Text>
+                <View style={styles.container}>
+                <Text style={styles.textoRegister}>Register</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email:text})}
-                    placeholder = "email"
+                    placeholder = "Email"
                     keyBoardType="email-adress"
                     value = {this.state.email}
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({password:text})}
-                    placeholder = "password"
+                    placeholder = "Contraseña"
                     keyBoardType="default"
                     secureTextEntry={true}
                     value = {this.state.password}
@@ -91,7 +92,7 @@ class Register extends Component {
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({userName:text})}
-                    placeholder = "user name"
+                    placeholder = "Nombre de usuario"
                     keyBoardType="default"
                     value = {this.state.userName}
                 />
@@ -99,59 +100,98 @@ class Register extends Component {
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({miniBio:text})}
-                    placeholder = "mini bio"
+                    placeholder = "Mini biografía"
                     keyBoardType="default"
                     value = {this.state.miniBio}
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({urlImagen:text})}
-                    placeholder = "foto de perfil"
+                    placeholder = "Foto de perfil"
                     keyBoardType="default"
                     value = {this.state.urlImagen}
                 />
 
                 <TouchableOpacity style={styles.button} onPress={()=> this.register(this.state.email,this.state.password,this.state.userName)}>
-                    <Text>Registrarse</Text>
+                    <Text style={styles.textButton}>Registrarse</Text>
                 </TouchableOpacity>
                 {this.state.errorMessage !== "" ?
                     <Text>{this.state.errorMessage}</Text>
                     : false
                 }
                 <TouchableOpacity onPress={()=>this.props.navigation.navigate("Login")}>
-                    <Text>Ya tengo cuenta. Ir a login</Text>
+                <Text style={styles.texto3}>Ya tengo cuenta.  <Text style={styles.texto2}>Ir a login</Text></Text>
                 </TouchableOpacity>
+                </View>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    formContainer:{
-        paddingHorizontal: 10, 
-        marginTop: 20, 
+    formContainer: {
+        paddingHorizontal: 10,
+        marginTop: 20,
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1
     },
+    container: {
+        backgroundColor: 'white',
+        borderRadius: 8,
+        margin: 10,
+        padding: 10,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        elevation: 5,
+        flex:1,
+        alignItems: "center",
+        justifyContent: "center",
+        maxHeight: "70%",
+        width: "40%"
+      },
     input: {
-        height: 20, 
-        paddingVertical: 15, 
-        paddingHorizontal:10,
-        borderWidth: 1, 
+        height: 20,
+        paddingVertical: 15,
+        paddingHorizontal: 10,
+        borderWidth: 1,
         borderColor: "#ccc",
-        borderStyle: 6, 
-        marginVertical: 10, 
+        borderStyle: "solid",
+        borderRadius: 6,
+        marginVertical: 10,
+        height: "10%",
+        width: "90%"
     },
-    button:{
-        backgroundColor:'#28a745',
+    button: {
+        backgroundColor: "rgb(99 71 239)",
         paddingHorizontal: 10,
         paddingVertical: 6,
-        textAlign: 'center',
-        borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#28a745'
+        textAlign: "center",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "purple",
+        marginTop: "20px"
     },
-    textButton:{
-        color: '#fff'
+    textButton: {
+        color: "#fff"
+    },
+    textoRegister: {
+        fontSize: "25px",
+        marginBottom: "20px",
+        marginTop: "20px"
+    },
+    texto2:{
+        marginTop: "10px",
+        color: "blue",
+        textDecorationColor:"blue",
+        textDecorationLine: "underline"
+    },
+    texto3:{
+        marginTop: "10px",
+        
     }
 })
 

@@ -11,6 +11,7 @@ import Home from "../../screens/Home/Home";
 import MiPerfil from "../../screens/MiPerfil/MiPerfil";
 import FormPostear from "../../screens/FormPostear/FormPostear";
 import Buscador from "../../screens/Buscador/Buscador";
+// import { IoIosSearch } from "react-icons/io";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,7 +27,7 @@ render(){
              <Tab.Screen name="Home" component={ Home } options = {{headerShown:true}}/>
              <Tab.Screen name="Postear" component={ FormPostear } />
              <Tab.Screen name="Mi perfil" component ={MiPerfil}/>
-             <Tab.Screen name ="Buscador" component={Buscador}/>
+             <Tab.Screen name ="Buscador" component={Buscador} />
           </Tab.Navigator>
      );
      

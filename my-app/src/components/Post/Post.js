@@ -159,7 +159,7 @@ class Post extends Component {
             )}
           />
           :
-          <Text>No hay comentarios</Text>
+          false
         }
 
 
