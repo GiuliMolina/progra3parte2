@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { auth, db } from '../../firebase/config';
-import { updatePassword } from "firebase/auth";
+// import { updatePassword } from "firebase/auth";
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, Image, FlatList} from "react-native";
 import Post from "../../components/Post/Post";
 

@@ -84,7 +84,7 @@ class FormPostear extends Component {
                     value={this.state.urlPost}
                 />
                 <TouchableOpacity
-                    style={styles.button} onPress={() => this.posteo(auth.currentUser.email, this.state.textPost, Date.now())}>
+                    style={styles.button} onPress={() => this.posteo( this.state.usuario, this.state.textPost, Date.now())}>
                     <Text style={styles.textButton}> Postear </Text>
                 </TouchableOpacity>
 
