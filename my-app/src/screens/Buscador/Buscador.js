@@ -63,36 +63,38 @@ class Buscador extends Component {
         return (
             <View style={styles.formContainer}>
                 <View style={styles.container}>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(text) => this.setState({ campoBusqueda: text })}
-                        placeholder="Nombre de usuario o mail"
-                        keyboardType="default"
-                        value={this.state.campoBusqueda}
-                    />
-                    <TouchableOpacity style={styles.button} onPress={() => this.busqueda()}>
-                        <Text style={styles.textoBoton}>Buscar</Text>
-                    </TouchableOpacity>
+                    <View style={styles.containerBusqueda}>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(text) => this.setState({ campoBusqueda: text })}
+                            placeholder="Nombre de usuario o mail"
+                            keyboardType="default"
+                            value={this.state.campoBusqueda}
+                        />
+                        <TouchableOpacity style={styles.button} onPress={() => this.busqueda()}>
+                            <Text style={styles.textoBoton}>Buscar</Text>
+                        </TouchableOpacity>
+                    </View>
                     {
                         this.state.campoBusqueda == "" ?
                             <Text> No hay busquedas todavia </Text> :
                             <Text> Resultados de busqueda para: {this.state.campoBusqueda}</Text>
                     }
-
+<View style={styles.containerUsuario}>
                     {
                         this.state.filtrado.length > 0 ?
                             <FlatList
                                 data={this.state.filtrado}
                                 keyExtractor={unUsuario => unUsuario.id}
                                 renderItem={({ item }) =>
-                                    <TouchableOpacity style={styles.button} onPress={() => this.usuarioSeleccionado(item.data.owner)}>
-                                        <Text>{item.data.userName}</Text>
+                                    <TouchableOpacity style={styles.botonUsuario} onPress={() => this.usuarioSeleccionado(item.data.owner)}>
+                                        <Text style={styles.usuario} >{item.data.userName}</Text>
                                     </TouchableOpacity>
                                 }
                             />
                             : <Text> No exise el email/usuario que busca</Text>
                     }
-
+</View>
                 </View>
 
 
@@ -125,10 +127,23 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 3,
         elevation: 5,
-        flex:1,
+        flex: 1,
         alignItems: "flex-start",
         justifyContent: "center",
-      },
+    },
+    containerBusqueda: {
+        flex: 1,
+        flexDirection: "row",
+        width: "100%",
+        alignItems: "center"
+    },
+    containerUsuario:{
+        backgroundColor: 'white',
+    borderRadius: 8,
+    margin: 10,
+    padding: 10,
+   
+    },
     input: {
         height: 20,
         paddingVertical: 15,
@@ -138,7 +153,7 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderRadius: 6,
         marginVertical: 10,
-        width: "50%",
+        width: "80%",
     },
     image: {
         width: 50,
@@ -157,12 +172,32 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderColor: "purple",
         width: "20%",
-        flex: 1
+        height: "20px",
+        paddingBottom: "15px",
+        paddingTop: " 15px",
+        flex: 1,
+        justifyContent:" center"
     },
     textoBoton: {
         textAlign: "center",
         color: "#fff",
         width: "100%"
+    },
+    botonUsuario:{
+        backgroundColor: "white",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        width: "20%",
+        height: "20px",
+        paddingBottom: "15px",
+        paddingTop: " 15px",
+        flex: 1,
+        justifyContent:" center"
     }
 })
 

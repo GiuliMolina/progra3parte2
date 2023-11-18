@@ -99,7 +99,7 @@ class Post extends Component {
           }}
         />
         <View styles={styles.comentario}>
-          <Text><Text style={styles.username}>{this.props.dataPost.data.userName}</Text>:{this.props.dataPost.data.textPost}</Text>
+          <Text><Text style={styles.username}>{this.props.dataPost.data.userName}:</Text>{this.props.dataPost.data.textPost}</Text>
         </View>
         {
           this.state.like ?
@@ -129,12 +129,12 @@ class Post extends Component {
         <TextInput
           style={styles.input}
           onChangeText={(texto) => this.setState({ comentarioTexto: texto })}
-          placeholder="Agregar comentario"
+          placeholder="Escribir comentario"
           keyboardType="default"
           value={this.state.comentarioTexto}
         />
-        <TouchableOpacity style={styles.otroButton} onPress={() => this.comentar(this.state.comentarioTexto)}>
-          <Text>Agregar comentario</Text>
+        <TouchableOpacity style={styles.botonComentario} onPress={() => this.comentar(this.state.comentarioTexto)}>
+          <Text style={styles.textoComentario}>Agregar comentario</Text>
         </TouchableOpacity>
         {
           this.props.dataPost.data.comentarios ?
@@ -218,14 +218,14 @@ const styles = StyleSheet.create({
   button: {
     paddingHorizontal: 10,
     paddingVertical: 6,
-    textAlign: "center",
+    textAlign: "start",
     borderRadius: 4,
     borderWidth: 1,
     borderStyle: "solid",
     width: "40%",
-    borderColor: "white"
+    borderColor: "white",
   },
-  otroButton: {
+  botonComentario: {
     paddingHorizontal: 10,
     paddingVertical: 6,
     textAlign: "center",
@@ -241,6 +241,7 @@ const styles = StyleSheet.create({
   },
   textButton: {
     color: 'white', 
+  textAlign: "start"
   },
   comentario: {
     flexDirection: 'row',
@@ -248,7 +249,10 @@ const styles = StyleSheet.create({
   },
   iconoLike:{
     color: "black",
-    fontSize: "20px"
+    fontSize: "20px",
+  },
+  textoComentario:{
+    textAlign: "center"
   }
 
 })
