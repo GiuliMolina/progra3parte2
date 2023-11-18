@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { auth, db } from '../../firebase/config';
 // import { updatePassword } from "firebase/auth";
+//import { deleteUser } from "firebase/auth";
+
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, Image, FlatList} from "react-native";
 import Post from "../../components/Post/Post";
 
@@ -72,9 +74,6 @@ class MiPerfil extends Component {
     // }
 
     render() {
-       console.log(this.state.data)
-       console.log(this.state.posteos)
-       console.log(this.state.usuarioLogueado)
         
         return (
             <View style = {styles.conteiner}>
