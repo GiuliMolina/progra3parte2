@@ -65,44 +65,43 @@ class FormPostear extends Component {
             .catch(e => console.log(`Se ha producido un error : ${e}`))
     }
 
-    onImageUpload(url){
-        this.setState({urlPost: url , showCamera: false});
-      }
+    onImageUpload(url) {
+        this.setState({ urlPost: url, showCamera: false });
+    }
 
     render() {
         console.log(this.state.usuarios)
         return (
             <View style={styles.container}>
-                <Text> Nuevo posteo </Text>
+                {/* <Text> Nuevo posteo </Text> */}
 
-                <Camara onImageUpload={ url => this.onImageUpload(url)} /> 
 
-                <>
+                {this.state.showCamera ? <Camara onImageUpload={(url) => this.onImageUpload(url)} /> :
 
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(texto) => this.setState({ textPost: texto })}
-                    placeholder='Ingresa un comentario'
-                    keyboardType='default'
-                    value={this.state.textPost}
-                />
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(texto) => this.setState({ urlPost: texto })}
-                    placeholder='post'
-                    keyBoardType='default'
-                    value={this.state.urlPost}
-                />
-                <TouchableOpacity
-                    style={styles.button} onPress={() => this.posteo( this.state.usuario, this.state.textPost, Date.now())}>
-                    <Text style={styles.textButton}> Postear </Text>
-                </TouchableOpacity>
-                </>
+                    <>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(texto) => this.setState({ urlPost: texto })}
+                            placeholder='post'
+                            keyBoardType='default'
+                            value={this.state.urlPost}
+                        />
+                        <></>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => {
+                                this.posteo();
+                                this.props.navigation.navigate('Home');
+                                this.setState({ showCamera: true });
+                            }}
+                        >
+                            <Text style={styles.textButton}> Postear </Text>
+                        </TouchableOpacity>
+                    </>}
 
             </View>
         )
     }
-
 }
 
 const styles = StyleSheet.create({
