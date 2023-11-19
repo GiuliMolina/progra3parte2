@@ -7,7 +7,8 @@ import {
     Text,
     StyleSheet,
     FlatList,
-    Image
+    Image,
+    ActivityIndicator
 } from "react-native";
 
 
@@ -63,38 +64,43 @@ class Buscador extends Component {
         return (
             <View style={styles.formContainer}>
                 <View style={styles.container}>
-                    <View style={styles.containerBusqueda}>
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={(text) => this.setState({ campoBusqueda: text })}
-                            placeholder="Nombre de usuario o mail"
-                            keyboardType="default"
-                            value={this.state.campoBusqueda}
-                        />
-                        <TouchableOpacity style={styles.button} onPress={() => this.busqueda()}>
-                            <Text style={styles.textoBoton}>Buscar</Text>
-                        </TouchableOpacity>
-                    </View>
+
+    
+                            <View style={styles.containerBusqueda}>
+                                <TextInput
+                                    style={styles.input}
+                                    onChangeText={(text) => this.setState({ campoBusqueda: text })}
+                                    placeholder="Nombre de usuario o mail"
+                                    keyboardType="default"
+                                    value={this.state.campoBusqueda}
+                                />
+                                <TouchableOpacity style={styles.button} onPress={() => this.busqueda()}>
+                                    <Text style={styles.textoBoton}>Buscar</Text>
+                                </TouchableOpacity>
+                            </View>
+
+
                     {
-                        this.state.campoBusqueda == "" ?
-                            <Text> No hay busquedas todavia </Text> :
-                            <Text> Resultados de busqueda para: {this.state.campoBusqueda}</Text>
+                        this.state.filtrado.length >= 0 && this.state.campoBusqueda !== "" ?
+
+                            <View style={styles.containerUsuario}>
+                                <Text> Resultados de busqueda para: {this.state.campoBusqueda}</Text>
+                                <FlatList
+                                    data={this.state.filtrado}
+                                    keyExtractor={unUsuario => unUsuario.id}
+                                    renderItem={({ item }) =>
+                                        <TouchableOpacity style={styles.botonUsuario} onPress={() => this.usuarioSeleccionado(item.data.owner)}>
+                                            <Text style={styles.usuario} >{item.data.userName}</Text>
+                                        </TouchableOpacity>
+                                    }
+                                />
+
+                            </View> : 
+                            <View>
+                                <Text> No existe el email/usuario que busca</Text>
+                            </View>
                     }
-<View style={styles.containerUsuario}>
-                    {
-                        this.state.filtrado.length > 0 ?
-                            <FlatList
-                                data={this.state.filtrado}
-                                keyExtractor={unUsuario => unUsuario.id}
-                                renderItem={({ item }) =>
-                                    <TouchableOpacity style={styles.botonUsuario} onPress={() => this.usuarioSeleccionado(item.data.owner)}>
-                                        <Text style={styles.usuario} >{item.data.userName}</Text>
-                                    </TouchableOpacity>
-                                }
-                            />
-                            : <Text> No exise el email/usuario que busca</Text>
-                    }
-</View>
+
                 </View>
 
 
@@ -137,12 +143,12 @@ const styles = StyleSheet.create({
         width: "100%",
         alignItems: "center"
     },
-    containerUsuario:{
+    containerUsuario: {
         backgroundColor: 'white',
-    borderRadius: 8,
-    margin: 10,
-    padding: 10,
-   
+        borderRadius: 8,
+        margin: 10,
+        padding: 10,
+
     },
     input: {
         height: 20,
@@ -176,14 +182,14 @@ const styles = StyleSheet.create({
         paddingBottom: "15px",
         paddingTop: " 15px",
         flex: 1,
-        justifyContent:" center"
+        justifyContent: " center"
     },
     textoBoton: {
         textAlign: "center",
         color: "#fff",
         width: "100%"
     },
-    botonUsuario:{
+    botonUsuario: {
         backgroundColor: "white",
         paddingHorizontal: 10,
         paddingVertical: 6,
@@ -197,7 +203,7 @@ const styles = StyleSheet.create({
         paddingBottom: "15px",
         paddingTop: " 15px",
         flex: 1,
-        justifyContent:" center"
+        justifyContent: " center"
     }
 })
 
