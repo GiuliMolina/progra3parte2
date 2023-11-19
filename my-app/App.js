@@ -17,11 +17,11 @@ export default function App() {
   return (
     <NavigationContainer style={styles.container}>
       <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Home"
         component ={Home}
         options = {{headerShown: true}}
-        />
+        /> */}
       <Stack.Screen
         name="Login"
         component ={Login}

@@ -7,6 +7,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { auth, db } from "../../firebase/config";
+import Camara from '../../components/Camara/Camara';
 
 
 class FormPostear extends Component {
@@ -17,7 +18,8 @@ class FormPostear extends Component {
             textPost: "",
             urlPost: '',
             usuario: auth.currentUser.email,
-            usuarios: []
+            usuarios: [],
+            showCamera: true,
         }
         console.log(this.state.textPost)
     }
@@ -52,23 +54,33 @@ class FormPostear extends Component {
                 usuario: "",
                 comentario: ""
             },
-            urlPost: this.state.urlPost,
+            photo: this.state.urlPost,
             createdAt: Date.now()
         })
             .then((response) => {
                 this.setState({
                     textPost: "",
-                    urlPost: "",
                 })
             })
             .catch(e => console.log(`Se ha producido un error : ${e}`))
     }
 
+    onImageUpload(url){
+        this.setState({ 
+            urlPost: url , 
+        });
+      }
+
     render() {
         console.log(this.state.usuarios)
         return (
             <View style={styles.container}>
-                <Text> Posteo </Text>
+                <Text> Nuevo posteo </Text>
+
+                <Camara onImageUpload={ url => this.onImageUpload(url)} /> 
+
+                <>
+
                 <TextInput
                     style={styles.input}
                     onChangeText={(texto) => this.setState({ textPost: texto })}
@@ -87,6 +99,7 @@ class FormPostear extends Component {
                     style={styles.button} onPress={() => this.posteo( this.state.usuario, this.state.textPost, Date.now())}>
                     <Text style={styles.textButton}> Postear </Text>
                 </TouchableOpacity>
+                </>
 
             </View>
         )

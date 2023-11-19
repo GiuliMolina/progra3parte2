@@ -110,7 +110,7 @@ class Post extends Component {
 
               style={styles.button}
               onPress={() => this.like()}>
-              <Text style={styles.textButton}> <BiSolidLike style={styles.iconoLike}/></Text>
+               <Text style={styles.textButton}> button </Text> {/*<BiSolidLike style={styles.iconoLike}/> */}
 
             </TouchableOpacity>
             :
