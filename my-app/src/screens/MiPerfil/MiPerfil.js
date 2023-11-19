@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { auth, db } from '../../firebase/config';
-import { deleteUser } from "firebase/auth";
+import { deleteUser, updateProfile } from "firebase/auth";
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, Image, FlatList} from "react-native";
 import Post from "../../components/Post/Post";
 
@@ -53,6 +53,8 @@ class MiPerfil extends Component {
         auth.signOut();
         this.props.navigation.navigate('Login');
     }
+
+
 
     // deletePost(){
     //     db.collection('posts').doc().delete()
