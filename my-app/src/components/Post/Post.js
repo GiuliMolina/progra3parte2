@@ -10,8 +10,8 @@ class Post extends Component {
     super(props)
     this.state = {
       like: true,
-      cantidadLikes: '',
-      comentarioTexto: "",
+      cantidadLikes:'',
+      comentarioTexto:"",
       comentarios: [],
       usuarioLogueado: auth.currentUser.email,
       todosUsuarios: [],
@@ -44,7 +44,7 @@ class Post extends Component {
 
     const nuevoComentario = {
       usuario: elUsuario,
-      comentario: comentario,
+      comentario:comentario,
     };
 
     const postRef = db.collection("posts").doc(this.props.dataPost.id);
@@ -100,7 +100,7 @@ class Post extends Component {
           }}
         />
         <View styles={styles.comentario}>
-          <Text><Text style={styles.username}>{this.props.dataPost.data.userName}</Text>:{this.props.dataPost.data.textPost}</Text>
+          <Text><Text style={styles.username}>{this.props.dataPost.data.userName}:</Text>{this.props.dataPost.data.textPost}</Text>
         </View>
         {
           this.state.like ?
@@ -135,7 +135,7 @@ class Post extends Component {
           keyboardType="default"
           value={this.state.comentarioTexto}
         />
-        <TouchableOpacity style={styles.otroButton} onPress={() => this.comentar(this.state.comentarioTexto)}>
+        <TouchableOpacity style={styles.botonComentario} onPress={() => this.comentar(this.state.comentarioTexto)}>
           <Text>Agregar comentario</Text>
         </TouchableOpacity>
         {
@@ -148,7 +148,7 @@ class Post extends Component {
 
 
         <TouchableOpacity onPress={() => this.setState({ mostrarComentarios: !this.state.mostrarComentarios })}>
-          <Text>
+          <Text style={styles.masComentarios}>
             {this.state.mostrarComentarios ? 'Ocultar Comentarios' : 'Mostrar Comentarios ultimos 4 comentarios'}
           </Text>
         </TouchableOpacity>
@@ -159,7 +159,7 @@ class Post extends Component {
             renderItem={({ item }) => (
               <TouchableOpacity>
                 <View styles={styles.comentario}>
-                  <Text><Text style={styles.username}>{item.usuario}</Text>: {item.comentario}</Text>
+                  <Text><Text style={styles.username}>{item.usuario}:</Text>{item.comentario}</Text>
                 </View>
               </TouchableOpacity>
             )}
@@ -177,7 +177,7 @@ class Post extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: "#F5F5DC",
     borderRadius: 8,
     margin: 10,
     padding: 10,
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     borderStyle: "solid",
-    width: "20%",
+    width: "30%",
     borderColor: "rgb(99 71 239)",
     backgroundColor: "rgb(99 71 239)",
     flex:1,
@@ -257,8 +257,10 @@ const styles = StyleSheet.create({
   },
   textoComentario:{
     textAlign: "center"
-  }
-
+  },
+  masComentarios:{
+    color:"#999999"
+  },
 
  })
 
