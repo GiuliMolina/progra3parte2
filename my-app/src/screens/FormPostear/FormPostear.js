@@ -68,7 +68,6 @@ class FormPostear extends Component {
     onImageUpload(url){
         this.setState({urlPost: url , showCamera: false});
       }
-
     render() {
         console.log(this.state.usuarios)
         return (
@@ -76,9 +75,7 @@ class FormPostear extends Component {
                 <Text> Nuevo posteo </Text>
 
                 <Camara onImageUpload={ url => this.onImageUpload(url)} /> 
-
                 <>
-
                 <TextInput
                     style={styles.input}
                     onChangeText={(texto) => this.setState({ textPost: texto })}
@@ -102,7 +99,6 @@ class FormPostear extends Component {
             </View>
         )
     }
-
 }
 
 const styles = StyleSheet.create({
