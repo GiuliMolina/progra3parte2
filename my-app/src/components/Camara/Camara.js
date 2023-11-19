@@ -9,7 +9,7 @@ class Camara extends Component{
         this.state = {
             permisos : false,
             photoUrl: '',
-            showCamera: true,
+            showCamera: false,
         }
         this.metodosCamera = ''
     }
@@ -30,7 +30,7 @@ class Camara extends Component{
         .then(photo => {
             this.setState({
                 photoUrl: photo.uri,
-                showCamera: true
+                showCamera: true,
             })
         })
         .catch(e => console.log(e))
@@ -40,7 +40,7 @@ class Camara extends Component{
         console.log('Cancelando')
         this.setState({
             photoUrl: '',
-            showCamera: false,
+            showCamera: true,
         })
     }
 
@@ -56,6 +56,7 @@ class Camara extends Component{
                 this.props.onImageUpload(url);
                 this.setState({
                     photoUrl: '',
+                    showCamera: false,
                 })
             }
             )
