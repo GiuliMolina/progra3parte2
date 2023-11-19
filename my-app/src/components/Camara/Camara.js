@@ -1,42 +1,43 @@
-import React, {Component} from 'react';
-import {Camera} from 'expo-camera';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import { storage } from '../../firebase/config';
+import React, { Component } from 'react';
+import { Camera } from 'expo-camera';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { db, storage } from '../../firebase/config';
 
-class Camara extends Component{
-    constructor(props){
+class Camara extends Component {
+    constructor(props) {
         super(props);
         this.state = {
-            permisos : false,
+            permisos: false,
             photoUrl: '',
-            showCamera: false,
+            showCamera: true,
         }
-        this.metodosCamera = ''
+        this.metodosDeCamera = '';
     }
-    
-    componentDidMount(){
+
+    componentDidMount() {
         Camera.requestCameraPermissionsAsync()
-        .then(() => {
-           this.setState({
-            permisos : true,
-           })
-        })
-        .catch(error => console.log(error))
-    }
-
-    takePhoto(){
-        console.log('Sacando foto')
-        this.metodosCamera.takePictureAsync()
-        .then(photo => {
-            this.setState({
-                photoUrl: photo.uri,
-                showCamera: true,
+            .then(() => {
+                this.setState({
+                    permisos: true,
+                })
             })
-        })
-        .catch(e => console.log(e))
+            .catch(error => console.log(error))
     }
 
-    decline(){
+    takePhoto() {
+        console.log('Sacando foto')
+        this.metodosDeCamera
+        .takePictureAsync()
+            .then(photo => {
+                this.setState({
+                    photoUrl: photo.uri,
+                    showCamera: false,
+                })
+            })
+            .catch(e => console.log(e))
+    }
+
+    decline() {
         console.log('Cancelando')
         this.setState({
             photoUrl: '',
@@ -44,81 +45,70 @@ class Camara extends Component{
         })
     }
 
-    accept(){
+    accept() {
         fetch(this.state.photoUrl)
-        .then(res => res.blob())
-        .then(img => {
-           const route = storage.ref(`photo/${Date.now()}.jpg`)
-           route.put(img)
-           .then( () => {
-            route.getDownloadURL()
-            .then( url => {
-                this.props.onImageUpload(url);
-                this.setState({
-                    photoUrl: '',
-                    showCamera: false,
-                })
-            }
-            )
-        })
-        })
-        .catch(e => console.log(e))
-        
+            .then(res => res.blob())
+            .then(img => {
+                const route = storage.ref(`photos/${Date.now()}.jpg`)
+                route.put(img)
+                    .then(() => {
+                        route.getDownloadURL().then(url => { this.props.onImageUpload(url) })
+                    })
+                    .then(() => {
+                        this.setState({
+                            photoUrl: '',
+                            showCamera: false,
+                        })
+                    });
+
+            })
+            .catch(e => console.log(e))
+
 
     }
 
-    render(){
+    render() {
+        return (
+            <>
+                {
+                    this.state.permisos ?
+                        this.state.showCamera ?
+                        <View style={styles.container}>
+                                <Camera
+                                    type= {Camera.Constants.Type.front}
+                                    ref = {(metodosDeCamera) => (this.metodosDeCamera = metodosDeCamera)}
+                                >
+                                    <View>
+                                        <TouchableOpacity style={styles.button}
+                                            onPress={() => this.takePhoto()}>
+                                                <Text>Sacar foto</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </Camera>
+                            </View>
+                            : 
+                            <View style={styles.container}>
+                                    <Image
+                                        source={{ uri: this.state.photoUrl }}
+                                    />
 
-        //console.log(this.state.photoUrl)
+                                    <TouchableOpacity style={styles.button}
+                                        onPress={() => this.decline()}>
+                                        <Text> Cancelar </Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.button}
+                                        onPress={() => this.accept()}>
+                                        <Text> Aceptar </Text>
+                                    </TouchableOpacity>
 
-        return(
-           <View style={styles.container}>
-            {
-               this.state.permisos === true ?
-                this.state.showCamera === true ?
+                                </View>
+                        : 
+                            <Text> Necesita aceptar los permisos de la cámara </Text>
+                        
+                }
+            </>
 
-                <React.Fragment>
-                    <Image
-                    source = {{uri: this.state.photoUrl}}
-                    />
 
-                 <View>
-                    <TouchableOpacity style={styles.button}
-                    onPress={()=> this.decline()}>
-                        <Text> Cancelar </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
-                    onPress={ () => this.accept()}>
-                        <Text> Aceptar </Text>
-                    </TouchableOpacity>
-
-                 </View>
-                    
-                
-                </React.Fragment>
-
-                :
-
-                <React.Fragment>
-                    <Camera
-                    type= {Camera.Constants.Type.front}
-                    ref = {metodosCamera => this.metodosCamera = metodosCamera}
-                    />
-
-                    <TouchableOpacity style={styles.button}
-                    onPress={ ()=> this.takePhoto()}>
-                        <Text> Sacar Foto </Text>
-                    </TouchableOpacity> 
-
-                </React.Fragment>
-
-                :
-                <Text> Necesita aceptar los permisos de la cámara </Text>
-            }
-           </View>
-
-            
-                
         )
     }
 }
@@ -135,8 +125,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 3,
         elevation: 5,
-      },
-      button: {
+    },
+    button: {
         backgroundColor: "purple",
         paddingHorizontal: 10,
         paddingVertical: 6,

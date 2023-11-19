@@ -66,9 +66,7 @@ class FormPostear extends Component {
     }
 
     onImageUpload(url){
-        this.setState({ 
-            urlPost: url , 
-        });
+        this.setState({urlPost: url , showCamera: false});
       }
 
     render() {
