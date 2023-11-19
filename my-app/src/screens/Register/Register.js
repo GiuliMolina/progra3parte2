@@ -1,4 +1,4 @@
-import react, {Component} from "react";
+import React, {Component} from "react";
 import {auth, db} from "../../firebase/config";
 import {TextInput, TouchableOpacity, View, Text, StyleSheet} from "react-native";
 
@@ -37,7 +37,7 @@ class Register extends Component {
                 errorMessage: "La contraseña tiene que tener por lo menos 6 caracteres"
             })
         }else{
-            auth.createUserWithEmailAndPassword(email,pass)
+            auth.createUserWithEmailAndPassword( email, pass)
             .then(response => {
     
                 db.collection('users').add({
@@ -112,15 +112,16 @@ class Register extends Component {
                     value = {this.state.urlImagen}
                 />
 
-                <TouchableOpacity style={styles.button} onPress={()=> this.register(this.state.email,this.state.password,this.state.userName)}>
-                    <Text style={styles.textButton}>Registrarse</Text>
+                <TouchableOpacity style={styles.button} 
+                onPress={()=> this.register(this.state.email, this.state.password, this.state.userName)}>
+                    <Text style={styles.textButton}> Registrarse </Text>
                 </TouchableOpacity>
                 {this.state.errorMessage !== "" ?
                     <Text>{this.state.errorMessage}</Text>
                     : false
                 }
                 <TouchableOpacity onPress={()=>this.props.navigation.navigate("Login")}>
-                <Text style={styles.texto3}>Ya tengo cuenta.  <Text style={styles.texto2}>Ir a login</Text></Text>
+                <Text style={styles.texto3}> Ya tengo cuenta. <Text style={styles.texto2}> Ir a login </Text></Text>
                 </TouchableOpacity>
                 </View>
             </View>

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import firebase from 'firebase';
 import { auth, db } from "../../firebase/config";
-import { BiSolidLike } from "react-icons/bi";
-import { BiSolidDislike } from "react-icons/bi";
+// import { BiSolidLike } from "react-icons/bi";
+// import { BiSolidDislike } from "react-icons/bi";
 
 class Post extends Component {
   constructor(props) {
@@ -78,6 +78,7 @@ class Post extends Component {
   }
 
 
+
   render() {
     return (
       <View style={styles.container}>
@@ -99,15 +100,17 @@ class Post extends Component {
           }}
         />
         <View styles={styles.comentario}>
-          <Text><Text style={styles.username}>{this.props.dataPost.data.userName}:</Text>{this.props.dataPost.data.textPost}</Text>
+          <Text><Text style={styles.username}>{this.props.dataPost.data.userName}</Text>:{this.props.dataPost.data.textPost}</Text>
         </View>
         {
           this.state.like ?
             <TouchableOpacity
 
+  
+
               style={styles.button}
               onPress={() => this.like()}>
-              <Text style={styles.textButton}> <BiSolidLike style={styles.iconoLike}/></Text>
+               <Text style={styles.textButton}> button </Text> {/*<BiSolidLike style={styles.iconoLike}/> */}
 
             </TouchableOpacity>
             :
@@ -120,7 +123,6 @@ class Post extends Component {
               <Text style={styles.textButton}> <BiSolidDislike style={styles.iconoLike}/></Text>
 
             </TouchableOpacity>
-
         }
         {
           this.props.dataPost.data.likes ?
@@ -129,18 +131,20 @@ class Post extends Component {
         <TextInput
           style={styles.input}
           onChangeText={(texto) => this.setState({ comentarioTexto: texto })}
-          placeholder="Escribir comentario"
+          placeholder="Agregar comentario"
           keyboardType="default"
           value={this.state.comentarioTexto}
         />
-        <TouchableOpacity style={styles.botonComentario} onPress={() => this.comentar(this.state.comentarioTexto)}>
-          <Text style={styles.textoComentario}>Agregar comentario</Text>
+        <TouchableOpacity style={styles.otroButton} onPress={() => this.comentar(this.state.comentarioTexto)}>
+          <Text>Agregar comentario</Text>
         </TouchableOpacity>
         {
           this.props.dataPost.data.comentarios ?
             <Text>Cantidad de comentarios: {this.props.dataPost.data.comentarios.length}</Text> :
             <Text> No hay comentarios en este posteo</Text>
         }
+
+       
 
 
         <TouchableOpacity onPress={() => this.setState({ mostrarComentarios: !this.state.mostrarComentarios })}>
@@ -255,6 +259,7 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 
-})
+
+ })
 
 export default Post;

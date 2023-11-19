@@ -1,4 +1,4 @@
-import react, { Component } from "react";
+import React, { Component } from "react";
 import {
   TextInput,
   TouchableOpacity,
@@ -6,10 +6,10 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  Image 
 } from "react-native";
-import { auth,db } from "../../firebase/config";
+import { auth, db } from "../../firebase/config";
 import Post from "../../components/Post/Post";
+import FormPostear from "../FormPostear/FormPostear";
 
 class Home extends Component {
   constructor() {
@@ -20,14 +20,15 @@ class Home extends Component {
       usuarios: [],
       foto:"",
       fotito:"",
-      nombreDeUsuario:null,
+      nombreDeUsuario: null,
       comentario: [],
       posteo:[]
     }
   }
 
   componentDidMount(){
-    db.collection('users').where("owner","==",this.state.usuario).onSnapshot(
+    
+    db.collection('users').where("owner","==", this.state.usuario).onSnapshot(
       docs =>{
         let ahoraUsuario = [];
         docs.forEach(doc=> {
@@ -64,7 +65,7 @@ class Home extends Component {
 
 
   render() {
-
+   console.log(this.state.usuario)
     return (
       <View style={Styles.container}>
 
@@ -82,6 +83,7 @@ class Home extends Component {
                         
                        
                     />
+                     
         }
       </View>
     );

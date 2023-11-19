@@ -1,4 +1,4 @@
-import react, { Component } from "react";
+import React, { Component } from "react";
 import { auth, db } from "../../firebase/config";
 import {
     TextInput,
@@ -9,6 +9,8 @@ import {
     FlatList,
     Image
 } from "react-native";
+import firebase from "firebase";
+
 
 class ProfileUsers extends Component {
     constructor(props) {

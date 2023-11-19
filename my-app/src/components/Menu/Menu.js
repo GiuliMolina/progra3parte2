@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import React,{Component} from "react";
+import React, {Component} from "react";
 import {
     TextInput,
     TouchableOpacity,

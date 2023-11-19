@@ -9,6 +9,7 @@ import FormPostear from './src/screens/FormPostear/FormPostear';
 import MiPerfil from "./src/screens/MiPerfil/MiPerfil";
 import Buscador from "./src/screens/Buscador/Buscador";
 import ProfileUsers from './src/screens/ProfileUsers/ProfileUsers';
+import Home from './src/screens/Home/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,11 @@ export default function App() {
   return (
     <NavigationContainer style={styles.container}>
       <Stack.Navigator>
+      {/* <Stack.Screen
+        name="Home"
+        component ={Home}
+        options = {{headerShown: true}}
+        /> */}
       <Stack.Screen
         name="Login"
         component ={Login}
