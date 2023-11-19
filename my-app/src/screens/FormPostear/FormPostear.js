@@ -65,9 +65,9 @@ class FormPostear extends Component {
             .catch(e => console.log(`Se ha producido un error : ${e}`))
     }
 
-    onImageUpload(url) {
-        this.setState({ urlPost: url, showCamera: false });
-    }
+    onImageUpload(url){
+        this.setState({urlPost: url , showCamera: false});
+      }
 
     render() {
         console.log(this.state.usuarios)

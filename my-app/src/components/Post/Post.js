@@ -96,7 +96,7 @@ class Post extends Component {
         <Image
           style={styles.postImage}
           source={{
-            uri: this.props.dataPost.data.urlPost
+            uri: this.props.dataPost.data.photo
           }}
         />
         <View styles={styles.comentario}>
