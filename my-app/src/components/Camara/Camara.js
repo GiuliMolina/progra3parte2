@@ -27,7 +27,7 @@ class Camara extends Component {
     takePhoto() {
         console.log('Sacando foto')
         this.metodosDeCamera
-        .takePictureAsync()
+            .takePictureAsync()
             .then(photo => {
                 this.setState({
                     photoUrl: photo.uri,
@@ -73,38 +73,38 @@ class Camara extends Component {
                 {
                     this.state.permisos ?
                         this.state.showCamera ?
-                        <View style={styles.container}>
+                            <View style={styles.container}>
                                 <Camera
-                                    type= {Camera.Constants.Type.front}
-                                    ref = {(metodosDeCamera) => (this.metodosDeCamera = metodosDeCamera)}
+                                    type={Camera.Constants.Type.front}
+                                    ref={(metodosDeCamera) => (this.metodosDeCamera = metodosDeCamera)}
                                 >
                                     <View>
                                         <TouchableOpacity style={styles.button}
                                             onPress={() => this.takePhoto()}>
-                                                <Text>Sacar foto</Text>
+                                            <Text>Sacar foto</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </Camera>
                             </View>
-                            : 
+                            :
                             <View style={styles.container}>
-                                    <Image
-                                        source={{ uri: this.state.photoUrl }}
-                                    />
+                                <Image
+                                    source={{ uri: this.state.photoUrl }}
+                                />
 
-                                    <TouchableOpacity style={styles.button}
-                                        onPress={() => this.decline()}>
-                                        <Text> Cancelar </Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.button}
-                                        onPress={() => this.accept()}>
-                                        <Text> Aceptar </Text>
-                                    </TouchableOpacity>
+                                <TouchableOpacity style={styles.button}
+                                    onPress={() => this.decline()}>
+                                    <Text> Cancelar </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.button}
+                                    onPress={() => this.accept()}>
+                                    <Text> Aceptar </Text>
+                                </TouchableOpacity>
 
-                                </View>
-                        : 
-                            <Text> Necesita aceptar los permisos de la cámara </Text>
-                        
+                            </View>
+                        :
+                        <Text> Necesita aceptar los permisos de la cámara </Text>
+
                 }
             </>
 
@@ -125,6 +125,12 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 3,
         elevation: 5,
+        height: `60vh`,
+        widht: `100vw`,
+    },
+    camera: {
+        widht: '100%',
+        height: '100%',
     },
     button: {
         backgroundColor: "purple",

@@ -73,18 +73,16 @@ class FormPostear extends Component {
         console.log(this.state.usuarios)
         return (
             <View style={styles.container}>
-                {/* <Text> Nuevo posteo </Text> */}
-
-
-                {this.state.showCamera ? <Camara onImageUpload={(url) => this.onImageUpload(url)} /> :
+    
+                {this.state.showCamera ? <Camara style={styles.camera} onImageUpload={(urlPost) => this.onImageUpload(urlPost)} /> :
 
                     <>
                         <TextInput
                             style={styles.input}
-                            onChangeText={(texto) => this.setState({ urlPost: texto })}
-                            placeholder='post'
+                            onChangeText={(texto) => this.setState({ textPost: texto })}
+                            placeholder='Escribir caption'
                             keyBoardType='default'
-                            value={this.state.urlPost}
+                            value={this.state.textPost}
                         />
                         <></>
                         <TouchableOpacity
@@ -105,9 +103,6 @@ class FormPostear extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: 10,
-    },
     input: {
         height: 20,
         paddingVertical: 10,
