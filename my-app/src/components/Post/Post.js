@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import firebase from 'firebase';
 import { auth, db } from "../../firebase/config";
-// import { BiSolidLike } from "react-icons/bi";
-// import { BiSolidDislike } from "react-icons/bi";
+import { BiSolidLike } from "react-icons/bi";
+import { BiSolidDislike } from "react-icons/bi";
 
 
 class Post extends Component {
@@ -111,7 +111,7 @@ class Post extends Component {
 
               style={styles.button}
               onPress={() => this.like()}>
-               <Text style={styles.textButton}> button </Text> {/*<BiSolidLike style={styles.iconoLike}/> */}
+               <Text style={styles.textButton}> <BiSolidLike style={styles.iconoLike}/> </Text> 
 
             </TouchableOpacity>
             :
@@ -132,16 +132,16 @@ class Post extends Component {
         <TextInput
           style={styles.input}
           onChangeText={(texto) => this.setState({ comentarioTexto: texto })}
-          placeholder="Agregar comentario"
+          placeholder="Comentario..."
           keyboardType="default"
           value={this.state.comentarioTexto}
         />
         <TouchableOpacity style={styles.botonComentario} onPress={() => this.comentar(this.state.comentarioTexto)}>
-          <Text>Agregar comentario</Text>
+          <Text> Agregar comentario </Text>
         </TouchableOpacity>
         {
           this.props.dataPost.data.comentarios ?
-            <Text>Cantidad de comentarios: {this.props.dataPost.data.comentarios.length}</Text> :
+            <Text> Cantidad de comentarios: {this.props.dataPost.data.comentarios.length}</Text> :
             <Text> No hay comentarios en este posteo</Text>
         }
 
@@ -187,6 +187,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 5,
+
   },
   header: {
     flexDirection: 'row',
@@ -221,7 +222,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   button: {
-    backgroundColor: "rgb(99 71 239)",
+    //backgroundColor: "rgb(99 71 239)",
     paddingHorizontal: 10,
     paddingVertical: 6,
     textAlign: "start",

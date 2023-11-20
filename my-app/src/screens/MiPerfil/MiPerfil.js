@@ -90,7 +90,7 @@ class MiPerfil extends Component {
     render() {
         
         return (
-            <View style = {styles.conteiner1}>
+            <View >
                  
 
                 <FlatList
@@ -99,14 +99,11 @@ class MiPerfil extends Component {
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
                         <View style={styles.info}>
-                           <Text>{item.data.userName}</Text>
+                           <Text> {item.data.userName}</Text>
                            <Image style={styles.profileImage} source={{ uri: item.data.urlImage }} />
-                           <Text>{this.state.usuarioLogueado} </Text>
-                           <Text>{item.data.miniBio} </Text>
+                           <Text> {this.state.usuarioLogueado} </Text>
+                           <Text> {item.data.miniBio} </Text>
                            <Text> Cantidad de posteos: {this.state.posteos.length} </Text>
-                        
-                       
-
                         </View>
                     )}
                 />
@@ -115,10 +112,11 @@ class MiPerfil extends Component {
                     data={this.state.posteos}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <View style={styles.conteiner2}>
+                        
+                        <View style={styles.conteinerView} >
                            <Post dataPost={item} navigation={this.props.navigation}/>
                            <TouchableOpacity style={styles.button} onPress={() => this.deletePost(item.id)}>
-                               <Text style={styles.textButton}> Delete </Text>
+                               <Text style={styles.textButton}> Delete post </Text>
                            </TouchableOpacity>
                         </View>
                     )}
@@ -157,27 +155,16 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         margin: 10,
         padding: 10,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 3,
-        elevation: 5,
-    },
-    conteiner2: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: 'white',
-        borderRadius: 8,
-        margin: 10,
-        padding: 10,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 3,
-        elevation: 5,
     },
     info: {
+        //flexDirection:'colum',
         justifyContent: 'center',
+        textAlign:'center',
+        marginBottom: 15,
+        marginTop:15,
+    },
+    conteinerView: {
+        flex: 1,
     },
     username: {
         fontSize: 16,
