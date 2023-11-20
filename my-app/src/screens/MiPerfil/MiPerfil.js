@@ -5,6 +5,7 @@ import { auth, db } from '../../firebase/config';
 //import { deleteUser } from "firebase/auth";
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, Image, FlatList} from "react-native";
 import Post from "../../components/Post/Post";
+import { BiNoEntry } from 'react-icons/bi';
 
 
 
@@ -88,25 +89,29 @@ class MiPerfil extends Component {
     // }
 
     render() {
+        console.log(this.state.data)
         
         return (
-            <View >
-                 
 
+    
+            <View style={styles.conteiner1} >
                 <FlatList
                   
-                    data={this.state.data}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                        <View style={styles.info}>
-                           <Text> {item.data.userName}</Text>
-                           <Image style={styles.profileImage} source={{ uri: item.data.urlImage }} />
-                           <Text> {this.state.usuarioLogueado} </Text>
-                           <Text> {item.data.miniBio} </Text>
-                           <Text> Cantidad de posteos: {this.state.posteos.length} </Text>
-                        </View>
-                    )}
-                />
+                  data={this.state.data}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => (
+                      <View style={styles.info}>
+                         <Text> {item.data.userName}</Text>
+                         <Image style={styles.profileImage} source={{ uri: item.data.urlImagen }} />
+                         <Text> {this.state.usuarioLogueado} </Text>
+                         <Text> {item.data.miniBio} </Text>
+                         <Text> Posteos: {this.state.posteos.length} </Text>
+                      </View>
+                  )}
+              />
+                 
+
+                
                 <Text> Mis posteos</Text>
                 <FlatList 
                     data={this.state.posteos}
@@ -116,7 +121,7 @@ class MiPerfil extends Component {
                         <View style={styles.conteinerView} >
                            <Post dataPost={item} navigation={this.props.navigation}/>
                            <TouchableOpacity style={styles.button} onPress={() => this.deletePost(item.id)}>
-                               <Text style={styles.textButton}> Delete post </Text>
+                               <Text style={styles.textButton}> Eliminar post </Text>
                            </TouchableOpacity>
                         </View>
                     )}
@@ -150,6 +155,7 @@ class MiPerfil extends Component {
 const styles = StyleSheet.create({
 
     conteiner1 : {
+        flex: 1,
         justifyContent: 'center',
         backgroundColor: 'white',
         borderRadius: 8,
@@ -157,11 +163,11 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     info: {
-        //flexDirection:'colum',
+        flexDirection:'row',
         justifyContent: 'center',
         textAlign:'center',
         marginBottom: 15,
-        marginTop:15,
+        marginTop:20,
     },
     conteinerView: {
         flex: 1,

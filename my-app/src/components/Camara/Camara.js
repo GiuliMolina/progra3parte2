@@ -87,7 +87,7 @@ class Camara extends Component {
                                 </Camera>
                             </View>
                             :
-                            <View style={styles.container}>
+                            <View style={styles.buttonnn}>
                                 <Image
                                     source={{ uri: this.state.photoUrl }}
                                 />
@@ -132,6 +132,10 @@ const styles = StyleSheet.create({
     camera: {
         widht: '100%',
         height: '100%',
+    },
+    buttonnn:{
+        flexDirection:'row',
+        justifyContent:'center',
     },
     button: {
         backgroundColor: "rgb(99 71 239)",
