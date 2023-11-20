@@ -78,10 +78,7 @@ class Home extends Component {
                         data= {this.state.listaDePosteos}
                         keyExtractor={ unPost => unPost.id }
                         renderItem={ ({item}) => <Post dataPost={item} navigation={this.props.navigation}/>
-                        }
-                     
-                        
-                       
+                        }  
                     />
                      
         }

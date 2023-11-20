@@ -91,7 +91,7 @@ class Post extends Component {
             }}
           />
           <TouchableOpacity onPress={() => this.props.navigation.navigate("MiPerfil")}>
-            <Text style={styles.username}>{this.props.dataPost.data.userName}</Text>
+            <Text style={styles.username}>{this.props.dataPost.data.userName} </Text>
           </TouchableOpacity>
         </View>
         <Image
@@ -101,14 +101,11 @@ class Post extends Component {
           }}
         />
         <View styles={styles.comentario}>
-          <Text><Text style={styles.username}>{this.props.dataPost.data.userName}:</Text>{this.props.dataPost.data.textPost}</Text>
+          <Text><Text style={styles.username}>{this.props.dataPost.data.userName}</Text> {this.props.dataPost.data.textPost}</Text>
         </View>
         {
           this.state.like ?
             <TouchableOpacity
-
-  
-
               style={styles.button}
               onPress={() => this.like()}>
                <Text style={styles.textButton}> <BiSolidLike style={styles.iconoLike}/> </Text> 
@@ -117,11 +114,10 @@ class Post extends Component {
             :
 
             <TouchableOpacity
-
               style={styles.button}
               onPress={() => this.unLike()}>
 
-              <Text style={styles.textButton}> <BiSolidDislike style={styles.iconoLike}/></Text>
+              <Text> <BiSolidDislike style={styles.iconoLike}/></Text>
 
             </TouchableOpacity>
         }
@@ -137,7 +133,7 @@ class Post extends Component {
           value={this.state.comentarioTexto}
         />
         <TouchableOpacity style={styles.botonComentario} onPress={() => this.comentar(this.state.comentarioTexto)}>
-          <Text> Agregar comentario </Text>
+          <Text style={styles.textButton}> Agregar comentario </Text>
         </TouchableOpacity>
         {
           this.props.dataPost.data.comentarios ?
@@ -222,15 +218,11 @@ const styles = StyleSheet.create({
     height: 200,
   },
   button: {
-    //backgroundColor: "rgb(99 71 239)",
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    textAlign: "start",
-    borderRadius: 4,
-    borderWidth: 1,
-    borderStyle: "solid",
-    width: "40%",
-    borderColor: "white",
+    marginTop: '3%',
+    height: '5%',
+    textAlign: "left",
+    width: "10%",
+    
   },
   botonComentario: {
     paddingHorizontal: 10,
@@ -248,7 +240,7 @@ const styles = StyleSheet.create({
   },
   textButton: {
     color: 'white', 
-  textAlign: "start"
+    textAlign: "center"
   },
   comentario: {
     flexDirection: 'row',

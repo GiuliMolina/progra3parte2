@@ -82,7 +82,7 @@ class FormPostear extends Component {
                         <TextInput
                             style={styles.input}
                             onChangeText={(texto) => this.setState({ textPost: texto })}
-                            placeholder='Escribir caption'
+                            placeholder='Escribir descripción'
                             keyBoardType='default'
                             value={this.state.textPost}
                         />
@@ -106,14 +106,24 @@ class FormPostear extends Component {
 
 const styles = StyleSheet.create({
     input: {
-        height: 20,
-        paddingVertical: 10,
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        width: "40%",
+        borderColor: "rgb(99 71 239)",
+        flex:1,
+        alignItems: "center",
+        marginTop:'10%',
+        marginHorizontal: '30%'
     },
     button: {
+        marginHorizontal: '30%',
+        marginTop: '5%',
         backgroundColor: "rgb(99 71 239)",
         paddingHorizontal: 10,
         paddingVertical: 6,
-        textAlign: "center",
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: "solid",
@@ -121,6 +131,7 @@ const styles = StyleSheet.create({
     },
     textButton: {
         color: 'white',
+        textAlign: 'center'
     }
 })
 

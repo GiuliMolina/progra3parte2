@@ -102,7 +102,7 @@ class MiPerfil extends Component {
                   renderItem={({ item }) => (
                       <View style={styles.info}>
                          <Text> {item.data.userName}</Text>
-                         <Image style={styles.profileImage} source={{ uri: item.data.urlImagen }} />
+                         <Image style={styles.profileImage}  source={{ uri: item.data.urlImagen }} />
                          <Text> {this.state.usuarioLogueado} </Text>
                          <Text> {item.data.miniBio} </Text>
                          <Text> Posteos: {this.state.posteos.length} </Text>
@@ -163,19 +163,16 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     info: {
-        flexDirection:'row',
-        justifyContent: 'center',
-        textAlign:'center',
+        alignItems: 'center',
         marginBottom: 15,
-        marginTop:20,
+        height: 150,
     },
     conteinerView: {
-        flex: 1,
+        flex: 2,
     },
     username: {
         fontSize: 16,
         fontWeight: 'bold',
-        marginRight: 10,
     },
     input: {
         height: 20, 
@@ -192,7 +189,6 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         borderWidth: 2,
         borderColor: '#fff',
-        marginRight: 10,
     },
     postImage: {
         width: '100%', 
