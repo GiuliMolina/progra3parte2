@@ -10,7 +10,7 @@ import {
     Image
 } from "react-native";
 import firebase from "firebase";
-
+import Post from "../../components/Post/Post";
 
 class ProfileUsers extends Component {
     constructor(props) {
@@ -53,41 +53,35 @@ class ProfileUsers extends Component {
     render() {
         console.log(this.state.listaDePosteos)
         return (
-            <View>
+            <View style={styles.container}>
                 <FlatList
                     data={this.state.usuarios}
                     keyExtractor={unUsuario => unUsuario.id}
                     renderItem={({ item }) =>
-                        <View>
-                            <Text>Nombre de usuario: {item.data.userName} </Text>
-                            <Text>Email:{item.data.owner}</Text>
-                            <Image
-                                style={styles.postImage}
+                        <View style={styles.containerUsuario}>
+                             <Image
+                                style={styles.profileImage}
                                 source={{
                                     uri: item.data.urlImagen
                                 }} />
+                            <Text>{item.data.userName} </Text>
                         </View>
                     }
                 />
                 {
-                    this.state.listaDePosteos == 0 ?
+                    this.state.listaDePosteos.length == 0 ?
+
                         <Text> Este usuario no tiene nigun posteo</Text> :
+                        <View>
+                        <Text>POSTEOS:</Text>
                         <FlatList
                             data={this.state.listaDePosteos}
                             keyExtractor={unPost => unPost.id}
                             renderItem={({ item }) =>
-                                <View>
-                                    <Text> {item.data.textPost} </Text>
-                                    <Text> {item.data.owner}</Text>
-                                    <Image
-                                        style={styles.profileImage}
-                                        source={{
-                                            uri: item.data.urlPost
-                                        }}
-                                    />
-                                </View>
+                                <Post dataPost={item} navigation={this.props.navigation}/>
                             }
                         />
+                        </View>
                 }
 
             </View>
@@ -96,10 +90,26 @@ class ProfileUsers extends Component {
 }
 
 const styles = StyleSheet.create({
+    containerUsuario:{
+        flexDirection: 'row',
+            alignItems: 'start',
+marginBottom: 10,
+    },
     username: {
         fontSize: 16,
         fontWeight: 'bold',
         marginRight: 10,
+    },
+    container: {
+        backgroundColor: "#F5F5DC",
+        borderRadius: 8,
+        margin: 10,
+        padding: 10,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        elevation: 5,
     },
     input: {
         height: 20,

@@ -11,7 +11,11 @@ import Home from "../../screens/Home/Home";
 import MiPerfil from "../../screens/MiPerfil/MiPerfil";
 import FormPostear from "../../screens/FormPostear/FormPostear";
 import Buscador from "../../screens/Buscador/Buscador";
-// import { IoIosSearch } from "react-icons/io";
+import { IoSearch } from "react-icons/io5";
+import { FaRegPlusSquare } from "react-icons/fa";
+import { IoPersonSharp } from "react-icons/io5";
+import { GoHomeFill } from "react-icons/go";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -24,10 +28,11 @@ class Menu extends Component{
 render(){
     return (
           <Tab.Navigator>
-             <Tab.Screen name="Home" component={ Home } options = {{headerShown:true}}/>
-             <Tab.Screen name="Postear" component={ FormPostear } />
-             <Tab.Screen name="Mi perfil" component ={MiPerfil}/>
-             <Tab.Screen name ="Buscador" component={Buscador} />
+             <Tab.Screen name="Home" component={ Home } options={{tabBarIcon: () => <GoHomeFill name='home' size={22} color='black'/>}}/>
+             <Tab.Screen name="Buscador" component={Buscador} options={{tabBarIcon: () => <IoSearch name='search' size={22} color='black'/>}}/>
+             <Tab.Screen name="Postear" component={ FormPostear } options={{tabBarIcon: () => <FaRegPlusSquare name='post' size={22} color='black'/>}}/>
+             <Tab.Screen name="Mi perfil" component ={MiPerfil} options={{tabBarIcon: () => <IoPersonSharp name='profile' size={22} color='black'/>}}/>
+             
           </Tab.Navigator>
      );
      

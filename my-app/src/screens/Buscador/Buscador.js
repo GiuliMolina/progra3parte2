@@ -19,6 +19,7 @@ class Buscador extends Component {
             backup: [],
             campoBusqueda: "",
             filtrado: [],
+            filtrado2: [],
             userId: "",
             infoUsuario: null,
             usuarios: []
@@ -47,12 +48,16 @@ class Buscador extends Component {
         let filtradoUsuarios = this.state.backup.filter(elm => {
             if (elm.data.owner.toLowerCase().includes(this.state.campoBusqueda.toLowerCase())) {
                 return elm
-            } else if (elm.data.userName.toLowerCase().includes(this.state.campoBusqueda.toLowerCase())) {
-                return elm
-
             }
         })
         this.setState({ filtrado: filtradoUsuarios })
+        
+        let filtradoUsuarios2 = this.state.backup.filter(elm => {
+            if (elm.data.owner.toLowerCase().includes(this.state.campoBusqueda.toLowerCase())) {
+                return elm
+            }
+        })
+        this.setState({ filtrado2: filtradoUsuarios2 })
     }
 
     usuarioSeleccionado(userId) {
@@ -81,12 +86,24 @@ class Buscador extends Component {
 
 
                     {
-                        this.state.filtrado.length >= 0 && this.state.campoBusqueda !== "" ?
+                        this.state.filtrado.length > 0 ?
 
                             <View style={styles.containerUsuario}>
-                                <Text> Resultados de busqueda para: {this.state.campoBusqueda}</Text>
+                                <Text style={styles.textoo}>RESULTADOS DE BÚSQUEDA PARA: {this.state.campoBusqueda}</Text>
+                                <Text style={styles.textoo}>MAILS:</Text>
                                 <FlatList
                                     data={this.state.filtrado}
+                                    keyExtractor={unUsuario => unUsuario.id}
+                                    renderItem={({ item }) =>
+                                        <TouchableOpacity style={styles.botonUsuario} onPress={() => this.usuarioSeleccionado(item.data.owner)}>
+                                            <Text style={styles.usuario} >{item.data.owner}</Text>
+                                        </TouchableOpacity>
+                                    }
+                                />
+
+                                <Text style={styles.textoo}>NOMBRES DE USUARIO: </Text>
+                                <FlatList
+                                    data={this.state.filtrado2}
                                     keyExtractor={unUsuario => unUsuario.id}
                                     renderItem={({ item }) =>
                                         <TouchableOpacity style={styles.botonUsuario} onPress={() => this.usuarioSeleccionado(item.data.owner)}>
@@ -95,7 +112,9 @@ class Buscador extends Component {
                                     }
                                 />
 
-                            </View> : 
+                            </View> 
+                            
+                            : 
                             <View>
                                 <Text> No existe el email/usuario que busca</Text>
                             </View>
@@ -148,7 +167,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         margin: 10,
         padding: 10,
-
     },
     input: {
         height: 20,
@@ -190,20 +208,24 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     botonUsuario: {
-        backgroundColor: "white",
+        backgroundColor: "rgb(99 71 239)",
         paddingHorizontal: 10,
         paddingVertical: 6,
-        textAlign: "center",
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: "solid",
         borderColor: "black",
-        width: "20%",
+        width: "60%",
         height: "20px",
         paddingBottom: "15px",
         paddingTop: " 15px",
         flex: 1,
-        justifyContent: " center"
+        justifyContent: " center",
+        alignItems: "center"
+    },
+    textoo:{
+        marginTop: "10px",
+        marginBottom: "10px"
     }
 })
 
