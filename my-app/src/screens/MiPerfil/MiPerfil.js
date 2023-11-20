@@ -3,8 +3,6 @@ import { auth, db } from '../../firebase/config';
 
 // import { updatePassword } from "firebase/auth";
 //import { deleteUser } from "firebase/auth";
-
-
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, Image, FlatList} from "react-native";
 import Post from "../../components/Post/Post";
 
@@ -18,7 +16,8 @@ class MiPerfil extends Component {
             nuevaPassword:"",
             nombreDeUsuario: "",
             usuarioLogueado: auth.currentUser.email,
-            posteos: [] 
+            posteos: [],
+            mostrarpost: true,
         }
     }
 
@@ -57,7 +56,18 @@ class MiPerfil extends Component {
         auth.signOut();
         this.props.navigation.navigate('Login');
     }
-
+    
+    deletePost(id) {
+        db.collection('posts').doc(id).delete()
+          .then(() => {
+            this.setState({
+              mostrarpost: false,
+            })
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
 
 
     // deletePost(){
@@ -80,7 +90,7 @@ class MiPerfil extends Component {
     render() {
         
         return (
-            <View style = {styles.conteiner}>
+            <View style = {styles.conteiner1}>
                  
 
                 <FlatList
@@ -93,17 +103,23 @@ class MiPerfil extends Component {
                            <Image style={styles.profileImage} source={{ uri: item.data.urlImage }} />
                            <Text>{this.state.usuarioLogueado} </Text>
                            <Text>{item.data.miniBio} </Text>
-                           <Text> Cantidad de posteos: </Text>
+                           <Text> Cantidad de posteos: {this.state.posteos.length} </Text>
+                        
+                       
+
                         </View>
                     )}
                 />
                 <Text> Mis posteos</Text>
-                <FlatList
+                <FlatList 
                     data={this.state.posteos}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <View style={styles.conteiner}>
+                        <View style={styles.conteiner2}>
                            <Post dataPost={item} navigation={this.props.navigation}/>
+                           <TouchableOpacity style={styles.button} onPress={() => this.deletePost(item.id)}>
+                               <Text style={styles.textButton}> Delete </Text>
+                           </TouchableOpacity>
                         </View>
                     )}
                 />
@@ -135,17 +151,33 @@ class MiPerfil extends Component {
 
 const styles = StyleSheet.create({
 
-    conteiner : {
-        flex: 1,
-        justifyContent: 'center'
+    conteiner1 : {
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        borderRadius: 8,
+        margin: 10,
+        padding: 10,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        elevation: 5,
     },
-    view: {
-        flex: 1
-
+    conteiner2: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        borderRadius: 8,
+        margin: 10,
+        padding: 10,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        elevation: 5,
     },
     info: {
-        justifyContent: 'center'
-
+        justifyContent: 'center',
     },
     username: {
         fontSize: 16,
@@ -184,7 +216,7 @@ const styles = StyleSheet.create({
         marginVertical: 10, 
     },
     button: {
-        backgroundColor: "purple",
+        backgroundColor: "rgb(99 71 239)",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",

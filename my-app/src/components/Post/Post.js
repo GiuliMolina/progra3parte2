@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   button: {
+    backgroundColor: "rgb(99 71 239)",
     paddingHorizontal: 10,
     paddingVertical: 6,
     textAlign: "start",

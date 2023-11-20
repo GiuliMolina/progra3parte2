@@ -20,6 +20,7 @@ class FormPostear extends Component {
             usuario: auth.currentUser.email,
             usuarios: [],
             showCamera: true,
+            cantidadDePosteos: '',
         }
         console.log(this.state.textPost)
     }
@@ -60,6 +61,7 @@ class FormPostear extends Component {
             .then((response) => {
                 this.setState({
                     textPost: "",
+                    cantidadDePosteos: this.props.dataPost.data.posteo.length
                 })
             })
             .catch(e => console.log(`Se ha producido un error : ${e}`))
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
     },
     button: {
-        backgroundColor: "purple",
+        backgroundColor: "rgb(99 71 239)",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",

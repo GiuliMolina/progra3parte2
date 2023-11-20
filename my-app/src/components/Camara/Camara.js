@@ -81,7 +81,7 @@ class Camara extends Component {
                                     <View>
                                         <TouchableOpacity style={styles.button}
                                             onPress={() => this.takePhoto()}>
-                                            <Text>Sacar foto</Text>
+                                            <Text style={styles.textButton}> Sacar foto </Text>
                                         </TouchableOpacity>
                                     </View>
                                 </Camera>
@@ -92,13 +92,13 @@ class Camara extends Component {
                                     source={{ uri: this.state.photoUrl }}
                                 />
 
-                                <TouchableOpacity style={styles.button}
+                                <TouchableOpacity style={styles.button2}
                                     onPress={() => this.decline()}>
-                                    <Text> Cancelar </Text>
+                                    <Text style={styles.textButton} > Cancelar </Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.button}
+                                <TouchableOpacity style={styles.button2}
                                     onPress={() => this.accept()}>
-                                    <Text> Aceptar </Text>
+                                    <Text style={styles.textButton} > Aceptar </Text>
                                 </TouchableOpacity>
 
                             </View>
@@ -127,13 +127,14 @@ const styles = StyleSheet.create({
         elevation: 5,
         height: `60vh`,
         widht: `100vw`,
+        justifyContent: 'center',
     },
     camera: {
         widht: '100%',
         height: '100%',
     },
     button: {
-        backgroundColor: "purple",
+        backgroundColor: "rgb(99 71 239)",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",
@@ -142,8 +143,21 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderColor: "#28a745",
     },
+    button2: {
+        backgroundColor: "rgb(99 71 239)",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "#28a745",
+        width: '30%',
+        
+    } ,
     textButton: {
-        color: 'white'
+        color: 'white',
+        textAlign: 'center',
     },
 })
 
